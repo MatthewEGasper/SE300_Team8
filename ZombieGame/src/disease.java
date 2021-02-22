@@ -9,7 +9,28 @@ public class disease {
 	private int tempLimitLow = 0, tempLimitHigh = 0, humidityLimitLow = 0, humidityLimitHigh = 0;
 	private float transmissionRange = 0;
 	private int lifespan = 0;
-	
+
+	public void calculateMutationChange() {
+		
+		float changeLethalityProbability = (float) Math.random();
+		if (changeLethalityProbability < mutationRate) {
+			float newLethality = (float) (lethality * (Math.random() * (1.2-1.05) + 1.05));
+			setLethality(newLethality);
+		}
+		
+		float changeTransmissionProbability = (float) Math.random();
+		if (changeTransmissionProbability < mutationRate) {
+			float newTransmission = (float) (transmissionRange * (Math.random() * (1.2-1.05) + 1.05));
+			setTransmissionRange(newTransmission);
+		}
+		
+		float changeLifespanProbability = (float) Math.random();
+		if (changeLifespanProbability < mutationRate) {
+			float newLifespan = (float) (lifespan * (Math.random() * (1.2-1.05) + 1.05));
+			setLifespan(lifespan);
+		}
+	}
+
 
 	public float getMutationRate() {
 		return mutationRate;
