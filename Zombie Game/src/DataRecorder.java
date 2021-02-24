@@ -15,26 +15,26 @@ public class DataRecorder {
 	public void setPopulation(int num) 				{population=num;}
 	public void setInfectedPopulation(int num)		{infectedPopulation=num;}
 	public void setImmunePopulation(int num)		{immunePopulation=num;}
-	public void setDpopulation(int num)				{dPopulation=num;}
-	public void setDinfectedPopulation(int num)		{dInfectedPopulation=num;}
-	public void setDimmunePopulation(int num)		{dImmunePopulation=num;}
+	public void setDPopulation(int num)				{dPopulation=num;}
+	public void setDInfectedPopulation(int num)		{dInfectedPopulation=num;}
+	public void setDImmunePopulation(int num)		{dImmunePopulation=num;}
 	public void setInfectionRate(float num)			{infectionRate=num;}
 	public void setMortalityRate(float num)			{mortalityRate=num;}
 	public void setRecoveryRate(float num)			{recoveryRate=num;}
-	public void setDinfectionRate(float num)		{dInfectionRate=num;}
-	public void setDmortalityRate(float num)		{dMortalityRate=num;}
-	public void setDrecoveryRate(float num)			{dRecoveryRate=num;}
+	public void setDInfectionRate(float num)		{dInfectionRate=num;}
+	public void setDMortalityRate(float num)		{dMortalityRate=num;}
+	public void setDRecoveryRate(float num)			{dRecoveryRate=num;}
 //-----------------------------------------------------------------------------
 	public int   getPopulation()			{return population;}
 	public int	 getInfectedPopulation()	{return infectedPopulation;}
 	public int 	 getImmunePopulation()		{return immunePopulation;}
-	public int 	 getDpopulation()			{return dPopulation;}
-	public int	 getDinfectedPopulation()	{return dInfectedPopulation;}
+	public int 	 getDPopulation()			{return dPopulation;}
+	public int	 getDInfectedPopulation()	{return dInfectedPopulation;}
 	public int	 getDImmunePopulation()		{return dImmunePopulation;}
 	public float getInfectionRate()			{return infectionRate;}
 	public float getMortalityRate()			{return mortalityRate;}
 	public float getRecoveryRate()			{return recoveryRate;}
-	public float getDinfectionRate()		{return dInfectionRate;}
-	public float getDmortalityRate()		{return dMortalityRate;}
-	public float getDrecoveryRate()			{return dRecoveryRate;}
+	public float getDInfectionRate()		{return dInfectionRate;}
+	public float getDMortalityRate()		{return dMortalityRate;}
+	public float getDRecoveryRate()			{return dRecoveryRate;}
 }
