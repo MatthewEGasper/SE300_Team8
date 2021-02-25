@@ -13,19 +13,19 @@ public class disease {
 	public void calculateMutationChange() {
 		
 		float changeLethalityProbability = (float) Math.random();
-		if (changeLethalityProbability < mutationRate) {
+		if (changeLethalityProbability < mutationRate/3) {
 			float newLethality = (float) (lethality * (Math.random() * (1.2-1.05) + 1.05));
 			setLethality(newLethality);
 		}
 		
 		float changeTransmissionProbability = (float) Math.random();
-		if (changeTransmissionProbability < mutationRate) {
+		if (changeTransmissionProbability < mutationRate/3) {
 			float newTransmission = (float) (transmissionRange * (Math.random() * (1.2-1.05) + 1.05));
 			setTransmissionRange(newTransmission);
 		}
 		
 		float changeLifespanProbability = (float) Math.random();
-		if (changeLifespanProbability < mutationRate) {
+		if (changeLifespanProbability < mutationRate/3) {
 			float newLifespan = (float) (lifespan * (Math.random() * (1.2-1.05) + 1.05));
 			setLifespan(lifespan);
 		}
