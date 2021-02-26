@@ -4,47 +4,47 @@
  * Auth: Elijah Jenkins
  * Date: 2/19/2021
  */
-public class disease {
-	private float mutationRate = 0, lethality = 0;
+public class Disease {
+	private double mutationRate = 0, lethality = 0;
 	private int tempLimitLow = 0, tempLimitHigh = 0, humidityLimitLow = 0, humidityLimitHigh = 0;
-	private float transmissionRange = 0;
+	private double transmissionRange = 0;
 	private int lifespan = 0;
 
 	public void calculateMutationChange() {
 		
-		float changeLethalityProbability = (float) Math.random();
+		double changeLethalityProbability = Math.random();
 		if (changeLethalityProbability < mutationRate/3) {
-			float newLethality = (float) (lethality * (Math.random() * (1.2-1.05) + 1.05));
+			double newLethality = (lethality * (Math.random() * (1.2-1.05) + 1.05));
 			setLethality(newLethality);
 		}
 		
-		float changeTransmissionProbability = (float) Math.random();
+		double changeTransmissionProbability = Math.random();
 		if (changeTransmissionProbability < mutationRate/3) {
-			float newTransmission = (float) (transmissionRange * (Math.random() * (1.2-1.05) + 1.05));
+			double newTransmission = (transmissionRange * (Math.random() * (1.2-1.05) + 1.05));
 			setTransmissionRange(newTransmission);
 		}
 		
-		float changeLifespanProbability = (float) Math.random();
+		double changeLifespanProbability = Math.random();
 		if (changeLifespanProbability < mutationRate/3) {
-			float newLifespan = (float) (lifespan * (Math.random() * (1.2-1.05) + 1.05));
+			double newLifespan = (lifespan * (Math.random() * (1.2-1.05) + 1.05));
 			setLifespan(lifespan);
 		}
 	}
 
 
-	public float getMutationRate() {
+	public double getMutationRate() {
 		return mutationRate;
 	}
 
-	public void setMutationRate(float mutationRate) {
+	public void setMutationRate(double mutationRate) {
 		this.mutationRate = mutationRate;
 	}
 
-	public float getLethality() {
+	public double getLethality() {
 		return lethality;
 	}
 
-	public void setLethality(float lethality) {
+	public void setLethality(double lethality) {
 		this.lethality = lethality;
 	}
 
@@ -64,11 +64,11 @@ public class disease {
 		this.tempLimitHigh = tempLimitHigh;
 	}
 
-	public float getTransmissionRange() {
+	public double getTransmissionRange() {
 		return transmissionRange;
 	}
 
-	public void setTransmissionRange(float transmissionRange) {
+	public void setTransmissionRange(double transmissionRange) {
 		this.transmissionRange = transmissionRange;
 	}
 
