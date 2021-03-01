@@ -4,12 +4,17 @@
  * Auth: Elijah Jenkins
  * Date: 2/19/2021
  */
+
 public class Disease {
 	private double mutationRate = 0, lethality = 0;
 	private int tempLimitLow = 0, tempLimitHigh = 0, humidityLimitLow = 0, humidityLimitHigh = 0;
 	private double transmissionRange = 0;
 	private int lifespan = 0;
 
+	public static void main(String[] args) {
+		System.out.print("Function not complete");
+	}
+	
 	public void calculateMutationChange() {
 		
 		double changeLethalityProbability = Math.random();
@@ -26,8 +31,8 @@ public class Disease {
 		
 		double changeLifespanProbability = Math.random();
 		if (changeLifespanProbability < mutationRate/3) {
-			double newLifespan = (lifespan * (Math.random() * (1.2-1.05) + 1.05));
-			setLifespan(lifespan);
+			int newLifespan = (int) (lifespan * (Math.random() * (1.2-1.05) + 1.05));
+			setLifespan(newLifespan);
 		}
 	}
 
