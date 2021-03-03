@@ -16,6 +16,9 @@ public class DataRecorder {
 	private int old_infected=0;
 	private float infection_rate=0, mortality_rate=0, recovery_rate=0;
 	
+	public DataRecorder(int num) {
+		intial_population = num;
+	}
 	
 	public void createDataDump() {
 		try {
