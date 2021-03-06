@@ -17,7 +17,7 @@ public class Game {
 		Disease d1 = new Disease(Math.random()*0.1, Math.random()*0.5, Math.random()*6, (int)(Math.random()*15));
 		
 		//create disease fighter calculator
-		DiseaseFighterCalculator fighter = new DiseaseFighterCalculator();
+		Contagion contagion = new Contagion();
 		
 		// create minor group and climate
 		MinorGroup group1 = new MinorGroup();
@@ -47,8 +47,8 @@ public class Game {
 			System.out.println("Life Span: " + d1.getLifespan() + "\n");
 			for (int j=0; j<group1.getPeople().size(); j++) {
 				if (group1.getPeople().get(j).getHasDisease()) {
-					fighter.calculateFight((group1.getPeople().get(j)));
-					fighter.updatePerson((group1.getPeople().get(j)));
+					contagion.diseaseFighterCalculator((group1.getPeople().get(j)));
+					
 				}	
 			}
 		}
