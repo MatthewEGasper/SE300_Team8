@@ -65,4 +65,49 @@ public class Contagion {
 		
 		return avg;
 	}
+	
+	public void calculateMutationChange(Disease d) {
+
+		if (d.getLethality() < 10) 
+		{
+			double changeLethalityProbability = Math.random();
+			if (changeLethalityProbability < d.getMutationRate()/3) {
+				double newLethality = (d.getLethality() * ((Math.random() * 0.2) + 0.05) + d.getLethality());
+				
+				if (newLethality > 10)
+				{
+					newLethality = 10;
+				}
+				d.setLethality(newLethality);
+			}
+		}
+
+		if (d.getTransmissionRange() < 10) 
+		{
+			double changeTransmissionProbability = Math.random();
+			if (changeTransmissionProbability < d.getMutationRate()/3) {
+				double newTransmission = (d.getTransmissionRange() + 0.5);
+				
+				if (newTransmission > 10)
+				{
+					newTransmission = 10;
+				}
+				d.setTransmissionRange(newTransmission);
+			}
+		}
+
+		if (d.getLifespan() < 28) 
+		{	
+			double changeLifespanProbability = Math.random();
+			if (changeLifespanProbability < d.getMutationRate()/3) {
+				int newLifespan = (d.getLifespan() + 2);
+				
+				if (newLifespan > 28) 
+				{
+					newLifespan = 28;
+				}
+				d.setLifespan(newLifespan);
+			}
+		}
+	}
 }
