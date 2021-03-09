@@ -9,6 +9,9 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.BufferedReader;
 
 public class DataRecorder {
 	private int intial_population=0, total_infected=0, total_immune=0, total_dead=0;
@@ -51,7 +54,6 @@ public class DataRecorder {
 			e.printStackTrace();
 		}
 	}
-	
 	public void writeDataDump() {
 		try {
 			FileWriter dataWriter = new FileWriter("data_dump.txt", true);
@@ -67,6 +69,46 @@ public class DataRecorder {
 		}catch (IOException e) {
 			System.out.println("You have angered the file system gods, while writing to a file!");
 			e.printStackTrace();
+		}
+	}
+	public void writeSaveFile(float mr, float tr, float leathality, int lifespan, int gs, int gn, int iterations) {
+		try {
+			File data = new File("save_file.txt");
+			if(data.createNewFile()) {
+				System.out.println("The file: " + data.getName() + " was created!");
+			}else {
+				System.out.println("The file: " + data.getName() + " already exists!");
+			}
+		}catch(IOException e) {
+			System.out.println("You have angered the file system gods, while creating file!");
+			e.printStackTrace();
+		}
+		
+		try {
+			FileWriter dataWriter = new FileWriter("save_file.txt", true);
+			System.out.println("Save File has been created!");
+			
+			dataWriter.write("MutationRate,TransmissionRange,Leathality,Lifespan,GroupSize,GroupNumber,Iterations,");
+			dataWriter.write("\n");
+			dataWriter.write(mr+","+tr+","+leathality+","+lifespan+","+gs+","+gn+"'"+iterations+"'");
+			dataWriter.close();
+			
+			System.out.println("Save File has been closed!");
+		}catch (IOException e) {
+			System.out.println("You have angered the file system gods, while writing to a file!");
+			e.printStackTrace();
+		}
+	}
+	public void readSaveFile() {
+		try {
+			BufferedReader br = Files.newBufferedReader(Paths.get("save_file.csv"));
+		    String line;
+		    while ((line = br.readLine()) != null) {
+		        String[] columns = line.split(",");
+		        System.out.println(String.join(", ", columns));
+		    }
+		} catch (IOException ex) {
+		    ex.printStackTrace();
 		}
 	}
 	
