@@ -93,7 +93,7 @@ public class Contagion {
 			if (d.getLethality() < 10) 
 			{
 				double changeLethalityProbability = Math.random();
-				if (changeLethalityProbability < d.getMutationRate()/3) {
+				if (changeLethalityProbability < d.getMutationRate()/mutationChances) {
 					double newLethality = (d.getLethality() * ((Math.random() * 0.2) + 0.05) + d.getLethality());
 				
 					if (newLethality > 10)
@@ -107,7 +107,7 @@ public class Contagion {
 			if (d.getTransmissionRange() < 10) 
 			{
 				double changeTransmissionProbability = Math.random();
-				if (changeTransmissionProbability < d.getMutationRate()/3) {
+				if (changeTransmissionProbability < d.getMutationRate()/mutationChances) {
 					double newTransmission = (d.getTransmissionRange() + 0.5);
 				
 					if (newTransmission > 10)
@@ -121,7 +121,7 @@ public class Contagion {
 			if (d.getLifespan() < 28) 
 			{	
 				double changeLifespanProbability = Math.random();
-				if (changeLifespanProbability < d.getMutationRate()/3) {
+				if (changeLifespanProbability < d.getMutationRate()/mutationChances) {
 					int newLifespan = (d.getLifespan() + 2);
 				
 					if (newLifespan > 28) 
