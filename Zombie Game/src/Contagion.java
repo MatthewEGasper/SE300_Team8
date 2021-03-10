@@ -67,46 +67,69 @@ public class Contagion {
 	}
 	
 	public void calculateMutationChange(Disease d) {
+		mutationChances = d.getMutationChances();
+		boolean lethalityTF = 1, transmissionTF = 1, lifespanTF = 1;
+		 
 
-		if (d.getLethality() < 10) 
-		{
-			double changeLethalityProbability = Math.random();
-			if (changeLethalityProbability < d.getMutationRate()/3) {
-				double newLethality = (d.getLethality() * ((Math.random() * 0.2) + 0.05) + d.getLethality());
-				
-				if (newLethality > 10)
-				{
-					newLethality = 10;
-				}
-				d.setLethality(newLethality);
-			}
+		if (d.getLethality >= 10 && lethalityTF) {
+			mutationChances = mutationChances - 1;
+			lethalityTF = 0;
 		}
 
-		if (d.getTransmissionRange() < 10) 
-		{
-			double changeTransmissionProbability = Math.random();
-			if (changeTransmissionProbability < d.getMutationRate()/3) {
-				double newTransmission = (d.getTransmissionRange() + 0.5);
-				
-				if (newTransmission > 10)
-				{
-					newTransmission = 10;
-				}
-				d.setTransmissionRange(newTransmission);
-			}
+		if (d.getTransmissionRange >= 10 && transmissionTF) {
+			mutationChances = mutationChances - 1;
+			transmissionTF = 0;
 		}
 
-		if (d.getLifespan() < 28) 
-		{	
-			double changeLifespanProbability = Math.random();
-			if (changeLifespanProbability < d.getMutationRate()/3) {
-				int newLifespan = (d.getLifespan() + 2);
+		if (d.getLifespan >= 28 && lifespanTF) {
+			mutationChances = mutationChances - 1;
+			lifespanTF = 0;
+		}
+
+		d.setMutationChances(mutationChances);
+		
+		if (mutationChances > 0) {
+		
+			if (d.getLethality() < 10) 
+			{
+				double changeLethalityProbability = Math.random();
+				if (changeLethalityProbability < d.getMutationRate()/3) {
+					double newLethality = (d.getLethality() * ((Math.random() * 0.2) + 0.05) + d.getLethality());
 				
-				if (newLifespan > 28) 
-				{
-					newLifespan = 28;
+					if (newLethality > 10)
+					{
+						newLethality = 10;
+					}
+					d.setLethality(newLethality);
 				}
-				d.setLifespan(newLifespan);
+			}
+
+			if (d.getTransmissionRange() < 10) 
+			{
+				double changeTransmissionProbability = Math.random();
+				if (changeTransmissionProbability < d.getMutationRate()/3) {
+					double newTransmission = (d.getTransmissionRange() + 0.5);
+				
+					if (newTransmission > 10)
+					{
+						newTransmission = 10;
+					}
+					d.setTransmissionRange(newTransmission);
+				}
+			}
+
+			if (d.getLifespan() < 28) 
+			{	
+				double changeLifespanProbability = Math.random();
+				if (changeLifespanProbability < d.getMutationRate()/3) {
+					int newLifespan = (d.getLifespan() + 2);
+				
+					if (newLifespan > 28) 
+					{
+						newLifespan = 28;
+					}
+					d.setLifespan(newLifespan);
+				}
 			}
 		}
 	}
