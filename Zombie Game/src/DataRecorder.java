@@ -22,7 +22,7 @@ public class DataRecorder {
 	public DataRecorder(int num) {
 		intial_population = num;
 	}
-	
+//-------------------------------------------------------------------------------------------------------------	
 	public void createDataDump() {
 		try {
 			File data = new File("data_dump.txt");
@@ -31,7 +31,7 @@ public class DataRecorder {
 			}else {
 				System.out.println("The file: " + data.getName() + " already exists!");
 			}
-		}catch(IOException e) {
+		} catch(IOException e) {
 			System.out.println("You have angered the file system gods, while creating file!");
 			e.printStackTrace();
 		}
@@ -49,12 +49,12 @@ public class DataRecorder {
 			
 			dataWriter.close();
 			System.out.println("data_dump.txt has been closed!");
-		}catch (IOException e) {
+		} catch (IOException e) {
 			System.out.println("You have angered the file system gods, while writing to a file!");
 			e.printStackTrace();
 		}
 	}
-	public void writeDataDump() {
+	public void appendDataDump() {
 		try {
 			FileWriter dataWriter = new FileWriter("data_dump.txt", true);
 			System.out.println("data_dump.txt has been opened!");
@@ -66,12 +66,26 @@ public class DataRecorder {
 			
 			dataWriter.close();
 			System.out.println("data_dump.txt has been closed!");
-		}catch (IOException e) {
+		} catch (IOException e) {
 			System.out.println("You have angered the file system gods, while writing to a file!");
 			e.printStackTrace();
 		}
 	}
-	public void writeSaveFile(float mr, float tr, float leathality, int lifespan, int gs, int gn, int iterations) {
+	public void readDataDump() {
+		try {
+			BufferedReader br = Files.newBufferedReader(Paths.get("data_dump.txt"));
+		    String line;
+		    while ((line = br.readLine()) != null) {
+		        String[] columns = line.split(",");
+		        System.out.println(String.join(", ", columns));
+		    }
+		} catch (IOException ex) {
+			System.out.println("You have angered the file system gods, while reading data_dump.txt");
+		    ex.printStackTrace();
+		}
+	}
+//-------------------------------------------------------------------------------------------------------------
+	public void createSaveFile() {
 		try {
 			File data = new File("save_file.txt");
 			if(data.createNewFile()) {
@@ -79,21 +93,33 @@ public class DataRecorder {
 			}else {
 				System.out.println("The file: " + data.getName() + " already exists!");
 			}
-		}catch(IOException e) {
+		} catch (IOException e) {
 			System.out.println("You have angered the file system gods, while creating file!");
 			e.printStackTrace();
 		}
 		
+	}
+	public void writeSaveFileHeader() {
 		try {
-			FileWriter dataWriter = new FileWriter("save_file.txt", true);
-			System.out.println("Save File has been created!");
-			
+			FileWriter dataWriter = new FileWriter("save_file.txt");
+			System.out.println("save_file.txt has been opened!");
 			dataWriter.write("MutationRate,TransmissionRange,Leathality,Lifespan,GroupSize,GroupNumber,Iterations,");
 			dataWriter.write("\n");
-			dataWriter.write(mr+","+tr+","+leathality+","+lifespan+","+gs+","+gn+"'"+iterations+"'");
 			dataWriter.close();
-			
-			System.out.println("Save File has been closed!");
+			System.out.println("save_file.txt has been closed!");
+		} catch (IOException e) {
+			System.out.println("You have angered the file system gods, while writing to a file!");
+			e.printStackTrace();
+		}
+	}
+	public void appendSaveFile(float mr, float tr, float leathality, int lifespan, int gs, int gn, int iterations) {
+		try {
+			FileWriter dataWriter = new FileWriter("save_file.txt", true);
+			System.out.println("save_file.txt has been opened!");
+			dataWriter.write(mr+","+tr+","+leathality+","+lifespan+","+gs+","+gn+","+iterations+",");
+			dataWriter.write("\n");
+			dataWriter.close();
+			System.out.println("save_file.txt has been closed!");
 		}catch (IOException e) {
 			System.out.println("You have angered the file system gods, while writing to a file!");
 			e.printStackTrace();
@@ -101,18 +127,19 @@ public class DataRecorder {
 	}
 	public void readSaveFile() {
 		try {
-			BufferedReader br = Files.newBufferedReader(Paths.get("save_file.csv"));
+			BufferedReader br = Files.newBufferedReader(Paths.get("save_file.txt"));
 		    String line;
 		    while ((line = br.readLine()) != null) {
 		        String[] columns = line.split(",");
 		        System.out.println(String.join(", ", columns));
 		    }
 		} catch (IOException ex) {
+			System.out.println("You have angered the file system gods, while reading save_file.txt");
 		    ex.printStackTrace();
 		}
 	}
 	
-//-----------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
 	public void calcInfectionRate() {
 		infection_rate = (current_infected-old_infected)/current_population;
 	}
