@@ -9,6 +9,7 @@ public class Game {
 		thingy.appendDataDump();
 		thingy.appendDataDump();
 		thingy.readDataDump();
+		thingy.readDataDumpRecent();
 		
 		thingy.createSaveFile();
 		thingy.writeSaveFileHeader();

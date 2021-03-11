@@ -9,6 +9,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.BufferedReader;
@@ -83,6 +84,41 @@ public class DataRecorder {
 			System.out.println("You have angered the file system gods, while reading data_dump.txt");
 		    ex.printStackTrace();
 		}
+	}
+	public void readDataDumpRecent() {  
+		File file = new File("data_dump.txt");
+		RandomAccessFile fileHandler = null;
+	    try {
+	        fileHandler = new RandomAccessFile( file, "r" );
+	        long fileLength = fileHandler.length() - 1;
+	        StringBuilder sb = new StringBuilder();
+
+	        for(long filePointer = fileLength; filePointer != -1; filePointer--){
+	            fileHandler.seek( filePointer );
+	            int readByte = fileHandler.readByte();
+
+	            if( readByte == 0xA ) {
+	                if( filePointer == fileLength ) {
+	                    continue;
+	                }
+	                break;
+
+	            } else if( readByte == 0xD ) {
+	                if( filePointer == fileLength - 1 ) {
+	                    continue;
+	                }
+	                break;
+	            }
+
+	            sb.append( ( char ) readByte );
+	        }
+
+	        String lastLine = sb.reverse().toString();
+	        System.out.println("Last Line is: " + lastLine);;
+	        fileHandler.close();
+	    } catch( IOException ex) {
+	    	ex.printStackTrace();
+	    }
 	}
 //-------------------------------------------------------------------------------------------------------------
 	public void createSaveFile() {
