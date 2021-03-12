@@ -9,7 +9,7 @@ public class Disease {
 	private double mutationRate = 0, lethality = 0;
 	private int tempLimitLow = 0, tempLimitHigh = 0, humidityLimitLow = 0, humidityLimitHigh = 0;
 	private double transmissionRange = 0;
-	private int lifespan = 0;
+	private int lifespan = 0, mutationChances = 0;	//todo, add mutationChances to constructor; currently not added to prevent cohesion issues
 	
 	public Disease() {
 		
@@ -87,6 +87,10 @@ public class Disease {
 		return tempLimitLow;
 	}
 
+	public int getMutationChances() {
+		return mutationChances;
+	}
+	
 	public void setTempLimitLow(int tempLimitLow) {
 		this.tempLimitLow = tempLimitLow;
 	}
@@ -106,4 +110,9 @@ public class Disease {
 	public void setLifespan(int lifespan) {
 		this.lifespan = lifespan;
 	}
+	
+	public void setMutationChances(int chances) {
+		mutationChances = chances;
+	}
+	
 }
