@@ -13,14 +13,14 @@ public class MinorGroup {
 	private DataRecorder recorder = new DataRecorder();
 	private int responseThreshold;
 	private int initialPopulation;
-	private int responseStrength;
-	private int baselinePopulationExposure;
+	private float responseStrength;
+	private float baselinePopulationExposure;
 	
 	public MinorGroup() {
 		
 	}
 	
-	public MinorGroup(int responseThreshold, int initialPopulation, int responseStrength, int baselinePopulationExposure) {
+	public MinorGroup(int responseThreshold, int initialPopulation, float responseStrength, float baselinePopulationExposure) {
 		this.responseThreshold = responseThreshold;
 		this.initialPopulation = initialPopulation;
 		this.responseStrength = responseStrength;
@@ -44,11 +44,11 @@ public class MinorGroup {
 		this.initialPopulation = initialPopulation;
 	}
 	
-	public void setResponseStrength(int responseStrength) {
+	public void setResponseStrength(float responseStrength) {
 		this.responseStrength = responseStrength;
 	}
 	
-	public void setBaselinePopulationExposure(int baselinePopulationExposure) {
+	public void setBaselinePopulationExposure(float baselinePopulationExposure) {
 		this.baselinePopulationExposure = baselinePopulationExposure;
 	}
 	
@@ -69,11 +69,11 @@ public class MinorGroup {
 		return this.initialPopulation;
 	}
 
-	public int getResponseStrength() {
+	public float getResponseStrength() {
 		return this.responseStrength;
 	}
 
-	public int getBaselinePopulationExposure() {
+	public float getBaselinePopulationExposure() {
 		return this.baselinePopulationExposure;
 	}
 }
