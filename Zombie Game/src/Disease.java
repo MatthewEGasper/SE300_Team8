@@ -14,11 +14,11 @@ public class Disease {
 	public Disease() {
 		
 	}
-	public Disease(double m, double l, double t, int ls) {
-		mutationRate = m;
-		lethality = l;
-		transmissionRange = t;
-		lifespan = ls;
+	public Disease(UserDefinedData userData) {
+		mutationRate = userData.getMutationRate();
+		lethality = userData.getLethality();
+		transmissionRange = userData.getTransmissionRange();
+		lifespan = userData.getLifespan();
 	}
 	
 	public void calculateMutationChange() {

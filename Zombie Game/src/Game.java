@@ -9,12 +9,11 @@ public class Game {
 		
 		// User inputs simulation info
 		Scanner scan = new Scanner(System.in);
+		UserDefinedData userData = new UserDefinedData();
 		
-		System.out.println("Enter size of group:");
-		int groupSize = scan.nextInt();
-		System.out.println("Random disease is created.");
+		userData.defineData();
 		// create Disease and set mutation rate
-		Disease d1 = new Disease(Math.random()*0.1, Math.random()*0.5, Math.random()*6, (int)(Math.random()*15));
+		Disease d1 = new Disease(userData);
 		
 		//create disease fighter calculator
 		DiseaseFighterCalculator fighter = new DiseaseFighterCalculator();
@@ -22,12 +21,10 @@ public class Game {
 		// create minor group and climate
 		MinorGroup group1 = new MinorGroup();
 		
-		System.out.println("How many iterations of disease mutation?");
-
-		int iterations = scan.nextInt();
+		
 		
 		// input people into group
-		for(int i = 0; i < groupSize; i++) {
+		for(int i = 0; i < userData.getGroupSize(); i++) {
 			if (Math.random() > 0.5) {
 				group1.getPeople().add(new Person(d1));
 			} else {
@@ -40,7 +37,7 @@ public class Game {
 		
 		// dispay 5 iterations of mutation of disease
 		System.out.println("Rate of mutation is: " + d1.getMutationRate());
-		for (int i = 0; i < iterations; i++) {
+		for (int i = 0; i < userData.getIterations(); i++) {
 			d1.calculateMutationChange();
 			System.out.println("Lethality: " + d1.getLethality());
 			System.out.println("Transmission Range: " + d1.getTransmissionRange());
