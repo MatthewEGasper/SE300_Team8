@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class MinorGroup {
 	private ArrayList<Person> people = new ArrayList<Person>();
 	private Climate climate;
-	private DataRecorder recorder = new DataRecorder();
+	private DataRecorder recorder;
 	private int responseThreshold;
 	private int initialPopulation;
 	private float responseStrength;
@@ -21,6 +21,7 @@ public class MinorGroup {
 	}
 	
 	public MinorGroup(int responseThreshold, int initialPopulation, float responseStrength, float baselinePopulationExposure) {
+		this.recorder = new DataRecorder(initialPopulation);
 		this.responseThreshold = responseThreshold;
 		this.initialPopulation = initialPopulation;
 		this.responseStrength = responseStrength;
