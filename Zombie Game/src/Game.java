@@ -5,6 +5,21 @@ public class Game {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Hello World");
+		DataRecorder thingy = new DataRecorder(1);
+		thingy.createDataDump();
+		thingy.writeDataDumpHeader();
+		thingy.appendDataDump();
+		thingy.appendDataDump();
+		thingy.appendDataDump();
+		thingy.readDataDump();
+		thingy.readDataDumpRecent();
+
+		thingy.createSaveFile();
+		thingy.writeSaveFileHeader();
+		thingy.appendSaveFile(0, 0, 0, 0, 0, 0, 0);
+		thingy.appendSaveFile(1, 1, 1, 1, 1, 1, 1);
+		thingy.appendSaveFile(2, 2, 2, 2, 2, 2, 2);
+		thingy.readSaveFile();
 
 		// User inputs simulation info
 		Scanner scan = new Scanner(System.in);
