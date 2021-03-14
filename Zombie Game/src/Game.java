@@ -35,7 +35,7 @@ public class Game {
 		// dispay 5 iterations of mutation of disease
 		System.out.println("Rate of mutation is: " + d1.getMutationRate());
 		for (int i = 0; i < userData.getIterations(); i++) {
-			d1.calculateMutationChange();
+			contagion.calculateMutationChange(d1);
 			System.out.println("Lethality: " + d1.getLethality());
 			System.out.println("Transmission Range: " + d1.getTransmissionRange());
 			System.out.println("Life Span: " + d1.getLifespan() + "\n");
@@ -66,22 +66,6 @@ public class Game {
 			}
 
 		}
-		System.out.println("Hello World");
-		DataRecorder thingy = new DataRecorder(1);
-		thingy.createDataDump();
-		thingy.writeDataDumpHeader();
-		thingy.appendDataDump();
-		thingy.appendDataDump();
-		thingy.appendDataDump();
-		thingy.readDataDump();
-		thingy.readDataDumpRecent();
-
-		thingy.createSaveFile();
-		thingy.writeSaveFileHeader();
-		thingy.appendSaveFile(0, 0, 0, 0, 0, 0, 0);
-		thingy.appendSaveFile(1, 1, 1, 1, 1, 1, 1);
-		thingy.appendSaveFile(2, 2, 2, 2, 2, 2, 2);
-		thingy.readSaveFile();
 	}
 
 }
