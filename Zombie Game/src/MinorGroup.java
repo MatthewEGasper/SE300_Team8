@@ -6,53 +6,54 @@ import java.util.ArrayList;
 // Auth: Jorge Santos
 // Date: 2/21/2021
 
-
 public class MinorGroup {
 	private ArrayList<Person> people = new ArrayList<Person>();
 	private Climate climate;
-	private DataRecorder recorder = new DataRecorder();
+	private DataRecorder recorder;
 	private int responseThreshold;
 	private int initialPopulation;
-	private int responseStrength;
-	private int baselinePopulationExposure;
-	
+	private float responseStrength;
+	private float baselinePopulationExposure;
+
 	public MinorGroup() {
-		
+
 	}
-	
-	public MinorGroup(int responseThreshold, int initialPopulation, int responseStrength, int baselinePopulationExposure) {
+
+	public MinorGroup(int responseThreshold, int initialPopulation, float responseStrength,
+			float baselinePopulationExposure) {
+		this.recorder = new DataRecorder(initialPopulation);
 		this.responseThreshold = responseThreshold;
 		this.initialPopulation = initialPopulation;
 		this.responseStrength = responseStrength;
 		this.baselinePopulationExposure = baselinePopulationExposure;
 	}
-	
-	//setters
+
+	// setters
 	public void setPeople(ArrayList<Person> people) {
 		this.people = people;
 	}
-	
+
 	public void setClimate(Climate climate) {
 		this.climate = climate;
 	}
-	
+
 	public void setResponseThreshold(int responseThreshold) {
 		this.responseThreshold = responseThreshold;
 	}
-	
+
 	public void setInitialPopulation(int initialPopulation) {
 		this.initialPopulation = initialPopulation;
 	}
-	
-	public void setResponseStrength(int responseStrength) {
+
+	public void setResponseStrength(float responseStrength) {
 		this.responseStrength = responseStrength;
 	}
-	
-	public void setBaselinePopulationExposure(int baselinePopulationExposure) {
+
+	public void setBaselinePopulationExposure(float baselinePopulationExposure) {
 		this.baselinePopulationExposure = baselinePopulationExposure;
 	}
-	
-	//getters
+
+	// getters
 	public ArrayList<Person> getPeople() {
 		return this.people;
 	}
@@ -69,11 +70,11 @@ public class MinorGroup {
 		return this.initialPopulation;
 	}
 
-	public int getResponseStrength() {
+	public float getResponseStrength() {
 		return this.responseStrength;
 	}
 
-	public int getBaselinePopulationExposure() {
+	public float getBaselinePopulationExposure() {
 		return this.baselinePopulationExposure;
 	}
 }
