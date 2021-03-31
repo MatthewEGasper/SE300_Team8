@@ -21,7 +21,7 @@ public class Person {
 	
 	public Person(Disease disease) {
 		this.disease = disease;
-		health = (float)(Math.random()*11);
+		health = (float)(Math.random()*101);
 		immuneSystemResistance = (float)(Math.random()*11);
 		hasDisease = true;
 	}

@@ -27,7 +27,7 @@ public class MinorGroup {
 		this.responseStrength = responseStrength;
 		this.baselinePopulationExposure = baselinePopulationExposure;
 	}
-
+	
 	// setters
 	public void setPeople(ArrayList<Person> people) {
 		this.people = people;
