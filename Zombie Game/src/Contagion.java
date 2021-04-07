@@ -22,19 +22,33 @@ public class Contagion {
 	}
 
 	/*
-	 * Last edited 3/11/21 Bryan Polk The disease fighter calculator takes a person
+	 * Last edited 4/6/21 Bryan Polk The disease fighter calculator takes a person
 	 * and checks for disease. This calculator is currently able to randomize damage
 	 * to the infected person based on the disease's lethality and the person's
 	 * immune system resistance, and updates the disease's lifespan variable after
 	 * iterating to reflect the time passing.
 	 */
 	public void diseaseFighterCalculator(Person person) {
-		if (person.getDisease() != null)// if the person is infected, calculate the fight process.
+		if (person.getDisease() != null && person.getLifeState() && person.getDisease().getLifespan() > 0)// if the person is infected and alive, calculate the fight process.
 		{
-			int damage = (int) ((person.getDisease().getLethality() - person.getImmuneSystemResistance()) * rng.nextInt(10));
+			//Sets the damage to a randomized value and updates person health and disease lifespan for the iteration
+			float damage = (int) ((person.getDisease().getLethality() - person.getImmuneSystemResistance()) * rng.nextInt(10));
 			person.setHealth(person.getHealth() - damage);
 			person.getDisease().setLifespan(person.getDisease().getLifespan() - 1);
-			;
+			//Checks if a condition has been met to either say the person has died or the disease has been fought off
+			if(person.getHealth()<= 0)
+			{
+				person.setLifeState(false);
+			}
+			if(person.getDisease().getLifespan() == 0)
+			{
+				ArrayList<Disease> immuneTemp = new ArrayList<Disease>();
+				immuneTemp = person.getImmunityList();
+				immuneTemp.add(person.getDisease());
+				person.setImmunityList(immuneTemp);
+				person.setDisease(null);
+				
+			}
 		}
 	}
 

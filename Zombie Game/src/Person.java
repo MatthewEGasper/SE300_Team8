@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /* File: Person.java
  * Name: Person
@@ -9,7 +10,7 @@
 public class Person {
 	private float immuneSystemResistance = 0, exposureLevel = 0, health = 0;
 	private boolean lifeState = true;
-	private boolean[] immunityList = new boolean[0];		//Change to string and add a name variable to diseases? or make this a disease array?
+	private ArrayList<Disease> immunityList = new ArrayList<Disease>();		//Change to string and add a name variable to diseases? or make this a disease array?
 	private Disease disease;
 	private boolean hasDisease = false;
 	
@@ -33,7 +34,7 @@ public class Person {
 		if (health <= 0) {this.setLifeState(false);}
 	}
 	public void setLifeState(boolean life)				{lifeState=life;}
-	public void setImmunityList(boolean[] immunities)	{immunityList=immunities;}
+	public void setImmunityList(ArrayList<Disease> immunities)	{immunityList=immunities;}
 	public void setDisease(Disease ailment)			{disease=ailment;}
 
 //-----------------------------------------------------------------------------
@@ -42,7 +43,7 @@ public class Person {
 	public float getExposureLevel()				{return exposureLevel;}
 	public float getHealth()					{return health;}
 	public boolean getLifeState()				{return lifeState;}
-	public boolean[] getImmunityList()			{return immunityList;}
+	public ArrayList<Disease> getImmunityList()			{return immunityList;}
 	public Disease getDisease()					{return disease;}
 	public boolean getHasDisease() 				{return hasDisease;}
 }
