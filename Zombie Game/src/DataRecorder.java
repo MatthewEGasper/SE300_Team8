@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Stream;
 import java.io.BufferedReader;
 
 public class DataRecorder {
@@ -24,8 +26,41 @@ public class DataRecorder {
 	public DataRecorder(int num) {
 		intial_population = num;
 	}
-
-	// -------------------------------------------------------------------------------------------------------------
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	public void writeDataCell(int lineNumber, int columnNumber, float value) throws IOException{
+	    String text = "";
+	    String[] columns = null;
+	    File data = new File("data_dump.txt");
+	    try (Stream<String> all_lines = Files.lines(Paths.get("data_dump.txt"))) {
+	    	text = all_lines.skip(lineNumber).findFirst().get();
+	    	columns = text.split(",");
+	    	columns[columnNumber]= ""+value;
+	    	text = String.join(", ", columns);
+	    	List<String> lines = Files.readAllLines(data.toPath());
+	    	lines.set(lineNumber, text);
+	    	Files.write(data.toPath(), lines);
+	    } catch (IOException e) {
+	      e.printStackTrace();
+	    }
+	    System.out.println(" The specific Line is: " + String.join(", ", columns));
+	}
+	
+	public float readDataCell (int lineNumber, int columnNumber) throws IOException{
+		String text = "";
+	    String[] columns = null;
+	    float cellValue = 0;
+	    try (Stream<String> all_lines = Files.lines(Paths.get("data_dump.txt"))) {
+	    	text = all_lines.skip(lineNumber).findFirst().get();
+	    	columns = text.split(",");
+	    	cellValue = Float.valueOf(columns[columnNumber]);
+	    } catch (IOException e) {
+	      e.printStackTrace();
+	    }
+	    return cellValue;
+	}
+	
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
 	public void createDataDump() {
 		try {
 			File data = new File("data_dump.txt");
@@ -68,7 +103,6 @@ public class DataRecorder {
 			dataWriter.write(current_population + "," + current_infected + "," + current_immune + "," + current_dead + ",");
 			dataWriter.write(infection_rate + "," + mortality_rate + "," + recovery_rate);
 			dataWriter.write("\n");
-
 			dataWriter.close();
 			System.out.println("data_dump.txt has been closed!");
 		} catch (IOException e) {
@@ -162,8 +196,7 @@ public class DataRecorder {
 		try {
 			FileWriter dataWriter = new FileWriter("save_file.txt", true);
 			System.out.println("save_file.txt has been opened!");
-			dataWriter
-					.write(mr + "," + tr + "," + leathality + "," + lifespan + "," + gs + "," + gn + "," + iterations + ",");
+			dataWriter.write(mr + "," + tr + "," + leathality + "," + lifespan + "," + gs + "," + gn + "," + iterations + ",");
 			dataWriter.write("\n");
 			dataWriter.close();
 			System.out.println("save_file.txt has been closed!");

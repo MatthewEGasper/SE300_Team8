@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -16,11 +17,22 @@ public class Main {
 
 		thingy.createSaveFile();
 		thingy.writeSaveFileHeader();
-		thingy.appendSaveFile(0, 0, 0, 0, 0, 0, 0);
+		thingy.appendSaveFile(3, 3, 3, 3, 3, 3, 3);
 		thingy.appendSaveFile(1, 1, 1, 1, 1, 1, 1);
 		thingy.appendSaveFile(2, 2, 2, 2, 2, 2, 2);
 		thingy.readSaveFile();
-
+		try {
+			thingy.writeDataCell(1,3,99);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			System.out.println("The Cell value is: "+thingy.readDataCell(1,3));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("$$$$$$$$$$$$$$$$$$$$$$");
+		
 		// User inputs simulation info
 		UserDefinedData userData = new UserDefinedData();
 
