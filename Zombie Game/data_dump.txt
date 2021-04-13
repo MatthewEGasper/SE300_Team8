@@ -1,4 +1,4 @@
 intial_population,total_infected,total_immune,total_dead,current_population,current_infected,current_immune,current_dead,infection_rate,mortality_rate,recover_rate
-1,0,0,0,0,0,0,0,0.0,0.0,0.0
+1, 0, 0, 99.0, 0, 0, 0, 0, 0.0, 0.0, 0.0
 1,0,0,0,0,0,0,0,0.0,0.0,0.0
 1,0,0,0,0,0,0,0,0.0,0.0,0.0
