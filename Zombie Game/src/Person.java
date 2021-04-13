@@ -12,6 +12,7 @@ public class Person {
 	private boolean[] immunityList = new boolean[0];		//Change to string and add a name variable to diseases? or make this a disease array?
 	private Disease disease;
 	private boolean hasDisease = false;
+	private boolean susceptible = true, exposed = false, infective = false, recovered = false;
 	
 	public Person() {
 		health = (float)(Math.random()*11);
@@ -35,7 +36,10 @@ public class Person {
 	public void setLifeState(boolean life)				{lifeState=life;}
 	public void setImmunityList(boolean[] immunities)	{immunityList=immunities;}
 	public void setDisease(Disease ailment)			{disease=ailment;}
-
+	public void setSusceptible(boolean s)				{susceptible=s;}
+	public void setExposed(boolean e)				{exposed=e;}
+	public void setInfective(boolean i)				{infective=i;}
+	public void setRecovered(boolean r)				{recovered=r;}
 //-----------------------------------------------------------------------------
 
 	public float getImmuneSystemResistance()	{return immuneSystemResistance;}
@@ -45,4 +49,8 @@ public class Person {
 	public boolean[] getImmunityList()			{return immunityList;}
 	public Disease getDisease()					{return disease;}
 	public boolean getHasDisease() 				{return hasDisease;}
+	public boolean getSusceptible() 			{return susceptible;}
+	public boolean getExposed() 				{return exposed;}
+	public boolean getInfective() 				{return infective;}
+	public boolean getRecovered() 				{return recovered;}
 }
