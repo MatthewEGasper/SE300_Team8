@@ -26,3 +26,4 @@ public class Climate {
 		return this.humidity;
 	}
 }
+

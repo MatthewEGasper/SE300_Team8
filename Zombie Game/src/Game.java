@@ -31,6 +31,8 @@ public class Game {
 
 		// create disease fighter calculator
 		Contagion contagion = new Contagion();
+		
+		
 
 		// create minor group and climate
 		MinorGroup group1 = new MinorGroup();
