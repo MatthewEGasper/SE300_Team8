@@ -43,6 +43,8 @@ public class Main {
 			userData.defineData();
 		}
 		
+		System.out.println("Good Bye!");
+		
 	}
 
 
