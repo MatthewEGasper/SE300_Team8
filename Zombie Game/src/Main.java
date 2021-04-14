@@ -1,11 +1,11 @@
 import java.io.IOException;
 import java.util.Scanner;
+import javax.swing.*;
 
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("Hello World");
+		GUI gui = new GUI();
 		DataRecorder thingy = new DataRecorder(1);
 		thingy.createDataDump();
 		thingy.writeDataDumpHeader();
@@ -32,16 +32,6 @@ public class Main {
 			e.printStackTrace();
 		}
 		System.out.println("$$$$$$$$$$$$$$$$$$$$$$");
-		
-		// User inputs simulation info
-		UserDefinedData userData = new UserDefinedData();
-
-		userData.defineData();
-		while (userData.getIterations() > 0) {
-			SimulationManager sim1 = new SimulationManager(userData);
-			sim1.runSim();
-			userData.defineData();
-		}
 		
 		System.out.println("Good Bye!");
 		

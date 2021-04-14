@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;SE300_Team8/Zombie Game/src/DiseaseFighterCalculator.java&apos; to &apos;Contagion.java&apos;" description="Rename resource &apos;DiseaseFighterCalculator.java&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Zombie Game/src/DiseaseFighterCalculator.java" name="Contagion.java" stamp="1615042480955" updateReferences="true"/>
+</session>

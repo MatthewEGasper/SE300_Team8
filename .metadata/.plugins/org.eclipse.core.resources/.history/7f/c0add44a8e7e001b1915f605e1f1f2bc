@@ -1,0 +1,62 @@
+/* File: Contagion.java
+ * Name: Contagion
+ * Desc: This class has consumed the scope of DiseaseFighterCalculator and includes DiseaseSSpreadCalculator and ResponseThresholdCalculator.
+ * It is best to consider this class a decentralized calculator for various interactions in the simulation.
+ * Auth: Elijah Jenkins/Bryan Polk
+ * Date: 3/06/2021
+ */
+
+import java.util.ArrayList;
+
+public class Contagion {
+	//Declare global variables
+	private ArrayList<Disease> diseaseArray;
+	
+
+	//Default constructor to initialize empty arraylist of diseases.
+    public Contagion()
+    {
+    	diseaseArray = new ArrayList<Disease>();
+    }
+    
+
+	//disease fighter functionality -> Use combination of lethality and resistance (and random numbers) to 
+	//either increase or decrease person's health. resistance could be lowered once person's health drops 
+	//below certain threshold, say 15%.
+	
+	//Currently implemented: Lethality/Resistance interact in calculations
+	//Disease lifespan is lowered by one "tick" accordingly
+	//Finally, person's health is updated to reflect either recovery or damage taken due to virus.
+	//Currently, the changes are not sent to the person's setters to avoid potential issues
+	//The only changes would be visible in the variables stored in this class.
+	public void diseaseFighterCalculator(Person person)
+	{
+		//Update global variables for the new person
+		this.person = person;
+		resistance = this.person.getImmuneSystemResistance();
+	    health = this.person.getHealth();
+	    lifeState = this.person.getLifeState();
+	    disease = this.person.getDisease();
+	    lethality = disease.getLethality();
+	    lifespan = disease.getLifespan();
+	    
+	    
+		if(disease != null)//if the person is infected, calculate the fight process.
+		{
+			float damage = (int)(lethality-resistance);	//TBD: Multiply by random value to determine severity of outcome
+			//TBD: Potentially add gradual increases to resistance or lethality depending on a treatment boolean?
+			health -= damage;
+			lifespan--;
+		}
+	}
+	
+	public void diseaseSpreadCalculator()
+	{
+		
+	}
+
+	public void responseThresholdCalculator(MinorGroup group, int responseThreshold)
+	{
+		
+	}
+}
