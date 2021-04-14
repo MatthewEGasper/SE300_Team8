@@ -8,6 +8,9 @@ public class SimulationManager {
 	int clock = 0;
 	
 	public SimulationManager(UserDefinedData userData) {
+
+		
+		
 		recorder = new DataRecorder(userData.getGroupSize());
 		disease = new Disease(userData);
 		for (int i = 0; i < userData.getGroupSize(); i++) {
@@ -35,6 +38,7 @@ public class SimulationManager {
 			}
 			clock++;
 		}
+		
 		this.printMinorGroup();
 	}
 	
