@@ -27,6 +27,44 @@ public class DataRecorder {
 		intial_population = num;
 	}
 	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	//Order in Save File: Leathality, Transmission Range, Lifespan, Population Density, Response Threshhold,, Reponse Strength
+	public void savePreset(String name, float leathality, float transmissionRange, float lifespan, float populationDensity, float responseThreshold, float responseStrength) {
+		try {
+			File data = new File(name);
+			FileWriter dataWriter = new FileWriter(name, true);
+			if (data.createNewFile()) {
+				System.out.println("The file: " + data.getName() + " was created!");
+			} else {
+				System.out.println("The file: " + data.getName() + " already exists!");
+			}
+			dataWriter.write(leathality + "," + transmissionRange + "," + lifespan + "," + populationDensity + "," + responseThreshold + "," + responseStrength);
+			dataWriter.write("\n");
+			dataWriter.close();
+			
+		} catch (IOException e) {
+			System.out.println("You have angered the file system gods, while creating file!");
+			e.printStackTrace();
+		}
+
+	}
+	public float[] readPreset(String name) {
+		String text = "";
+	    String[] columns = null;
+	    float[] preset = new float[6];
+	    
+	    try (Stream<String> all_lines = Files.lines(Paths.get(name))) {
+	    	text = all_lines.skip(0).findFirst().get();
+	    	columns = text.split(",");
+	    	for(int i=0; i<6; i++) {
+	    		preset[i] = Float.valueOf(columns[i]);
+	    	}
+	    } catch (IOException e) {
+	      e.printStackTrace();
+	    }
+		return preset;
+	}
+	
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	public void writeDataCell(int lineNumber, int columnNumber, float value) throws IOException{
 	    String text = "";
 	    String[] columns = null;

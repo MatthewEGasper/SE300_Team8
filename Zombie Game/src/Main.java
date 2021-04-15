@@ -7,20 +7,30 @@ public class Main {
 		// TODO Auto-generated method stub
 		System.out.println("Hello World");
 		DataRecorder thingy = new DataRecorder(1);
-		thingy.createDataDump();
-		thingy.writeDataDumpHeader();
-		thingy.appendDataDump();
-		thingy.appendDataDump();
-		thingy.appendDataDump();
-		thingy.readDataDump();
-		thingy.readDataDumpRecent();
-
-		thingy.createSaveFile();
-		thingy.writeSaveFileHeader();
-		thingy.appendSaveFile(3, 3, 3, 3, 3, 3, 3);
-		thingy.appendSaveFile(1, 1, 1, 1, 1, 1, 1);
-		thingy.appendSaveFile(2, 2, 2, 2, 2, 2, 2);
-		thingy.readSaveFile();
+		
+//		thingy.createDataDump();
+//		thingy.writeDataDumpHeader();
+//		thingy.appendDataDump();
+//		thingy.appendDataDump();
+//		thingy.appendDataDump();
+//		thingy.readDataDump();
+//		thingy.readDataDumpRecent();
+//
+//		thingy.createSaveFile();
+//		thingy.writeSaveFileHeader();
+//		thingy.appendSaveFile(3, 3, 3, 3, 3, 3, 3);
+//		thingy.appendSaveFile(1, 1, 1, 1, 1, 1, 1);
+//		thingy.appendSaveFile(2, 2, 2, 2, 2, 2, 2);
+//		thingy.readSaveFile();
+		
+		System.out.println("----------TESTING SAVE PRESET METHODS----------");
+		thingy.savePreset("test.txt", 0, 1, 2, 3, 4, 5);
+		float[] tester = thingy.readPreset("test.txt");
+		for(int i=0; i<6; i++) {
+			System.out.println(tester[i]);
+		}
+		System.out.println("----------TESTING COMPLETE----------");
+		
 		try {
 			thingy.writeDataCell(1,3,99);
 		} catch (IOException e) {
