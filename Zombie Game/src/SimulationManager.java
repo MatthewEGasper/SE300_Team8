@@ -7,6 +7,11 @@ public class SimulationManager {
 	int iterations;
 	int clock = 0;
 	
+	
+	public SimulationManager() {
+		
+	}
+	
 	public SimulationManager(UserDefinedData userData) {
 
 		
@@ -35,6 +40,7 @@ public class SimulationManager {
 					contagion.diseaseFighterCalculator((group.getPeople().get(j)));
 
 				}
+				group.checkTotals();
 			}
 			clock++;
 		}
@@ -57,14 +63,18 @@ public class SimulationManager {
 			}
 
 		}
+		System.out.println(group.getNumSusceptible());
 	}
 	
+	
 	// setters
+	
 	
 	// getters
 	public DataRecorder getDataRecorder() { return recorder; }
 	public Contagion getContagion() { return contagion; }
 	public MinorGroup getMinorGroup() { return group; }
 	public Disease getDisease() { return disease; }
+	public int getClock() { return clock; }
 	
 }

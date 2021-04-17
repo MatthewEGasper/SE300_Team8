@@ -14,6 +14,8 @@ public class Person {
 																																			// diseases? or make this a disease array?
 	private Disease disease;
 	private boolean hasDisease = false;
+	
+	private boolean susceptible = true, infected = false, recovered = false;
 
 	public Person() {
 		health = (float) (Math.random() * 11);
@@ -54,6 +56,20 @@ public class Person {
 	public void setDisease(Disease ailment) {
 		disease = ailment;
 	}
+	
+	public void setSusceptible(boolean s) {
+		susceptible = s;
+	}
+	
+	public void setInfected() {
+		infected = true;
+		susceptible = false;
+	}
+	
+	public void setRecovered() {
+		recovered = true;
+		infected = false;
+	}
 
 	// -----------------------------------------------------------------------------
 
@@ -83,5 +99,17 @@ public class Person {
 
 	public boolean getHasDisease() {
 		return hasDisease;
+	}
+	
+	public boolean getSusceptible() {
+		return susceptible;
+	}
+	
+	public boolean getInfected() {
+		return infected;
+	}
+	
+	public boolean getRecovered() {
+		return recovered;
 	}
 }

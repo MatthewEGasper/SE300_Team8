@@ -52,6 +52,7 @@ public class Contagion {
 				immuneTemp.add(person.getDisease());
 				person.setImmunityList(immuneTemp);
 				person.setDisease(null);
+				person.setRecovered();
 
 			}
 		}
@@ -84,6 +85,7 @@ public class Contagion {
 								// the disease and the at risk person's immune system
 								// The at risk person is infected.
 								group.getPeople().get(j).setDisease(group.getPeople().get(i).getDisease());
+								group.getPeople().get(j).setInfected();
 							}
 						}
 					}
