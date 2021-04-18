@@ -221,6 +221,43 @@ public class DataRecorder {
 	}
 
 	// -------------------------------------------------------------------------------------------------------------
+	//Order in Save File: Leathality, Transmission Range, Lifespan, Population Density, Response Threshhold,, Reponse Strength
+	public void savePreset(String name, float leathality, float transmissionRange, float lifespan, float mutationRate, float iterations, float groupSize) {
+		try {
+			File data = new File(name);
+			FileWriter dataWriter = new FileWriter(name, true);
+			if (data.createNewFile()) {
+				System.out.println("The file: " + data.getName() + " was created!");
+			} else {
+				System.out.println("The file: " + data.getName() + " already exists!");
+			}
+			dataWriter.write(leathality + "," + transmissionRange + "," + lifespan + "," + mutationRate + "," + iterations + "," + groupSize);
+			dataWriter.write("\n");
+			dataWriter.close();
+			
+		} catch (IOException e) {
+			System.out.println("You have angered the file system gods, while creating file!");
+			e.printStackTrace();
+		}
+
+	}
+	public float[] readPreset(String name) {
+		String text = "";
+	    String[] columns = null;
+	    float[] preset = new float[6];
+	    
+	    try (Stream<String> all_lines = Files.lines(Paths.get(name))) {
+	    	text = all_lines.skip(0).findFirst().get();
+	    	columns = text.split(",");
+	    	for(int i=0; i<6; i++) {
+	    		preset[i] = Float.valueOf(columns[i]);
+	    	}
+	    } catch (IOException e) {
+	      e.printStackTrace();
+	    }
+		return preset;
+	}
+	// -------------------------------------------------------------------------------------------------------------
 	public void calcInfectionRate() {
 		infection_rate = (current_infected - old_infected) / current_population;
 	}

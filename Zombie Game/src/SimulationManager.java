@@ -1,6 +1,5 @@
 
 public class SimulationManager {
-	DataRecorder recorder;
 	Contagion contagion = new Contagion();
 	MinorGroup group = new MinorGroup();
 	Disease disease;
@@ -16,7 +15,6 @@ public class SimulationManager {
 
 		
 		
-		recorder = new DataRecorder(userData.getGroupSize());
 		disease = new Disease(userData);
 		for (int i = 0; i < userData.getGroupSize(); i++) {
 			if (Math.random() > 0.5) {
@@ -71,7 +69,6 @@ public class SimulationManager {
 	
 	
 	// getters
-	public DataRecorder getDataRecorder() { return recorder; }
 	public Contagion getContagion() { return contagion; }
 	public MinorGroup getMinorGroup() { return group; }
 	public Disease getDisease() { return disease; }
