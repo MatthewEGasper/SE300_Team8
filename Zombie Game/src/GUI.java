@@ -14,10 +14,10 @@ public class GUI implements ActionListener
 	JFrame frame;
 	JPanel intro1, intro2, intro3, intro4, intro5, intro6;
 	JLabel intro1Label, intro2Label, intro3Label, intro4Label, intro5Label, intro6Label;
-	JButton introStart, start, pause, end;
-	JTextField transmissionInput, mutationInput, groupSizeInput, iterationInput, lethalityInput, lifespanInput;
-	JLabel transmissionLabel, mutationLabel, groupSizeLabel, iterationLabel, lethalityLabel, lifespanLabel;
-	JPanel transmission, mutation,  groupSize, iteration, lethality, lifespan;
+	JButton introStart, loadPresets, savePresets, start, pause, end;
+	JTextField headerInput, transmissionInput, mutationInput, groupSizeInput, iterationInput, lethalityInput, lifespanInput;
+	JLabel headerLabel, transmissionLabel, mutationLabel, groupSizeLabel, iterationLabel, lethalityLabel, lifespanLabel;
+	JPanel header, transmission, mutation,  groupSize, iteration, lethality, lifespan;
 	JPanel susceptible, infected, recovered, dead, goodbye, addIterations;
 	JLabel susceptibleLabel, infectedLabel, recoveredLabel, deadLabel, goodbyeLabel, addIterationsLabel;
 	JButton conclude, resume, results;
@@ -106,6 +106,34 @@ public class GUI implements ActionListener
 		frame.add(introStart);
 		introStart.addActionListener(this);
 		
+		loadPresets = new JButton("Load Preset Values");
+		loadPresets.setBounds(375, 100, 150, 100);
+		loadPresets.setBackground(Color.gray);
+		loadPresets.setForeground(Color.green);
+		loadPresets.setVisible(false);
+		frame.add(loadPresets);
+		loadPresets.addActionListener(this);
+		
+		savePresets = new JButton("Save Preset Values");
+		savePresets.setBounds(375, 250, 150, 100);
+		savePresets.setBackground(Color.gray);
+		savePresets.setForeground(Color.green);
+		savePresets.setVisible(false);
+		frame.add(savePresets);
+		savePresets.addActionListener(this);
+		
+		//Create File Header Input Field
+		header = new JPanel(new FlowLayout(SwingConstants.LEADING, 25, 15));
+		header.setBounds(315, 5, 275, 100);
+		header.setBackground(Color.black);
+		headerInput = new JTextField("", 20);
+		headerLabel = new JLabel("File Name: (If loading/saving presets)");
+		headerLabel.setFont(standard);
+		headerLabel.setForeground(Color.green);
+		header.add(headerLabel);
+		header.add(headerInput);
+		header.setVisible(false);
+		
 		//Create transmission range input section
 		transmission = new JPanel(new FlowLayout(SwingConstants.LEADING, 25, 15));
 		transmission.setBounds(50, 75, 275, 100);
@@ -179,6 +207,7 @@ public class GUI implements ActionListener
 		iteration.setVisible(false);
 
 		//Add the panels to the frame
+		frame.add(header);
 		frame.add(transmission);
 		frame.add(mutation);
 		frame.add(lethality);
@@ -188,7 +217,7 @@ public class GUI implements ActionListener
 
 		//Add buttons to start/pause/end simulation. END IS NOT IN USE CURRENTLY.
 		start = new JButton("Run Simulation");
-		start.setBounds(375, 250, 150, 100);
+		start.setBounds(375, 400, 150, 100);
 		start.setBackground(Color.gray);
 		start.setForeground(Color.green);
 		start.setVisible(false);
@@ -356,6 +385,7 @@ public class GUI implements ActionListener
 	
 	private void displayInputMenu()
 	{
+		header.setVisible(true);
 		transmission.setVisible(true);
 		mutation.setVisible(true);
 		lethality.setVisible(true);
@@ -363,6 +393,8 @@ public class GUI implements ActionListener
 		groupSize.setVisible(true);
 		iteration.setVisible(true);
 		start.setVisible(true);
+		savePresets.setVisible(true);
+		loadPresets.setVisible(true);
 		pause.setVisible(false);
 		susceptible.setVisible(false);
 		infected.setVisible(false);
@@ -391,6 +423,7 @@ public class GUI implements ActionListener
 
 	private void displaySimulationEndMenu()
 	{
+		header.setVisible(false);
 		transmission.setVisible(false);
 		mutation.setVisible(false);
 		lethality.setVisible(false);
@@ -398,6 +431,8 @@ public class GUI implements ActionListener
 		groupSize.setVisible(false);
 		iteration.setVisible(false);
 		start.setVisible(false);
+		savePresets.setVisible(false);
+		loadPresets.setVisible(false);
 		pause.setVisible(false);
 		susceptible.setVisible(true);
 		infected.setVisible(true);
@@ -425,6 +460,7 @@ public class GUI implements ActionListener
 
 	private void displayAddIterationsMenu()
 	{
+		header.setVisible(false);
 		transmission.setVisible(false);
 		mutation.setVisible(false);
 		lethality.setVisible(false);
@@ -432,6 +468,8 @@ public class GUI implements ActionListener
 		groupSize.setVisible(false);
 		iteration.setVisible(false);
 		start.setVisible(false);
+		savePresets.setVisible(false);
+		loadPresets.setVisible(false);
 		pause.setVisible(false);
 		susceptible.setVisible(true);
 		infected.setVisible(true);
@@ -459,6 +497,7 @@ public class GUI implements ActionListener
 
 	private void displayProgramEndMenu()
 	{
+		header.setVisible(false);
 		transmission.setVisible(false);
 		mutation.setVisible(false);
 		lethality.setVisible(false);
@@ -466,6 +505,8 @@ public class GUI implements ActionListener
 		groupSize.setVisible(false);
 		iteration.setVisible(false);
 		start.setVisible(false);
+		savePresets.setVisible(false);
+		loadPresets.setVisible(false);
 		pause.setVisible(false);
 		susceptible.setVisible(true);
 		infected.setVisible(true);
@@ -493,6 +534,7 @@ public class GUI implements ActionListener
 
 	private void displayGoodbyeWindow()
 	{
+		header.setVisible(false);
 		transmission.setVisible(false);
 		mutation.setVisible(false);
 		lethality.setVisible(false);
@@ -500,6 +542,8 @@ public class GUI implements ActionListener
 		groupSize.setVisible(false);
 		iteration.setVisible(false);
 		start.setVisible(false);
+		savePresets.setVisible(false);
+		loadPresets.setVisible(false);
 		pause.setVisible(false);
 		susceptible.setVisible(false);
 		infected.setVisible(false);
@@ -547,6 +591,17 @@ public class GUI implements ActionListener
 			//Tell Simulation to Go
 		}
 		
+		if(e.getSource() == loadPresets)
+		{
+			//load presets
+			//headerInput is textfield name
+		}
+		
+		if(e.getSource() == savePresets)
+		{
+			//save textfield inputs as presets
+		}
+		
 		if(e.getSource() == start)
 		{
 			//Start simulation
@@ -559,6 +614,7 @@ public class GUI implements ActionListener
 			userData[5] = iterationInput.getText();
 			if(userInputs.defineData(userData))
 			{
+				header.setVisible(false);
 				transmission.setVisible(false);
 				mutation.setVisible(false);
 				lethality.setVisible(false);
@@ -566,6 +622,8 @@ public class GUI implements ActionListener
 				groupSize.setVisible(false);
 				iteration.setVisible(false);
 				start.setVisible(false);
+				savePresets.setVisible(false);
+				loadPresets.setVisible(false);
 				pause.setVisible(true);
 				simulate();
 				susceptible.setVisible(true);

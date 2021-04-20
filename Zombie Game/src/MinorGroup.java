@@ -22,7 +22,7 @@ public class MinorGroup {
 
 	public MinorGroup(int responseThreshold, int initialPopulation, float responseStrength,
 			float baselinePopulationExposure) {
-		this.recorder = new DataRecorder(initialPopulation);
+		this.recorder = new DataRecorder();
 		this.responseThreshold = responseThreshold;
 		this.initialPopulation = initialPopulation;
 		this.responseStrength = responseStrength;
