@@ -5,16 +5,13 @@ public class SimulationManager {
 	Disease disease;
 	int iterations;
 	int clock = 0;
-	
+	DataRecorder recorder = new DataRecorder();
 	
 	public SimulationManager() {
-		
+
 	}
 	
 	public SimulationManager(UserDefinedData userData) {
-
-		
-		
 		disease = new Disease(userData);
 		for (int i = 0; i < userData.getGroupSize(); i++) {
 			if (Math.random() > 0.5) {
@@ -26,6 +23,7 @@ public class SimulationManager {
 		iterations = userData.getIterations();
 	}
 	
+	
 	public void runSim() {
 		this.printMinorGroup();
 		for (int i = 0; i < iterations; i++) {
@@ -33,6 +31,7 @@ public class SimulationManager {
 			System.out.print((i+1) + ".) Lethality: " + disease.getLethality());
 			System.out.print(" Transmission Range: " + disease.getTransmissionRange());
 			System.out.print(" Life Span: " + disease.getLifespan() + "\n");
+			
 			for (int j = 0; j < group.getPeople().size(); j++) {
 				if (group.getPeople().get(j).getHasDisease()) {
 					contagion.diseaseFighterCalculator((group.getPeople().get(j)));
@@ -72,6 +71,9 @@ public class SimulationManager {
 	public Contagion getContagion() { return contagion; }
 	public MinorGroup getMinorGroup() { return group; }
 	public Disease getDisease() { return disease; }
-	public int getClock() { return clock; }
+	
+	public void setUserInputs(UserDefinedData userData) {
+		iterations = userData.getIterations();
+	}
 	
 }

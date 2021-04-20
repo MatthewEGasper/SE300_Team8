@@ -24,15 +24,16 @@ public class GUI implements ActionListener
 	JButton cancel, saveYes, saveNo;
 	JButton cancel1, iterationsOnly, changeVariables;
 	UserDefinedData userInputs;
-	private SimulationManager sim = new SimulationManager();
+	private SimulationManager name;
+	//private SimulationManager name = new SimulationManager();
 
-
-	public GUI()
+	public GUI(SimulationManager stuff)
 	{
+		
+		name = stuff;
 		//Create default font and instantiate UserDefinedData.
 		standard = new Font("TimesRoman", Font.PLAIN, 16);
 		userInputs = new UserDefinedData();
-
 
 		//Create the frame
 		frame = new JFrame("The Zombie Simulation");
@@ -116,7 +117,7 @@ public class GUI implements ActionListener
 		transmission.add(transmissionLabel);
 		transmission.add(transmissionInput);
 		transmission.setVisible(false);
-
+		
 		//Create mutation rate input section
 		mutation = new JPanel(new FlowLayout(SwingConstants.LEADING, 25, 15));
 		mutation.setBounds(50, 250, 275, 100);
@@ -206,7 +207,7 @@ public class GUI implements ActionListener
 		susceptible = new JPanel(new FlowLayout(SwingConstants.LEADING, 25, 15));
 		susceptible.setBounds(50, 75, 275, 100);
 		susceptible.setBackground(Color.black);
-		susceptibleLabel = new JLabel("Total number of susceptible people: " + sim.getMinorGroup().getNumSusceptible());
+		susceptibleLabel = new JLabel("Total number of susceptible people: " + name.getMinorGroup().getNumSusceptible());
 		susceptibleLabel.setFont(standard);
 		susceptibleLabel.setForeground(Color.green);
 		susceptible.add(susceptibleLabel);
@@ -216,7 +217,7 @@ public class GUI implements ActionListener
 		infected = new JPanel(new FlowLayout(SwingConstants.LEADING, 25, 15));
 		infected.setBounds(50, 175, 275, 100);
 		infected.setBackground(Color.black);
-		infectedLabel = new JLabel("Total number of infected people: " + sim.getMinorGroup().getNumInfected());
+		infectedLabel = new JLabel("Total number of infected people: " + name.getMinorGroup().getNumInfected());
 		infectedLabel.setFont(standard);
 		infectedLabel.setForeground(Color.green);
 		infected.add(infectedLabel);
@@ -226,7 +227,7 @@ public class GUI implements ActionListener
 		recovered = new JPanel(new FlowLayout(SwingConstants.LEADING, 25, 15));
 		recovered.setBounds(50, 275, 275, 100);
 		recovered.setBackground(Color.black);
-		recoveredLabel = new JLabel("Total number of recovered people: " + sim.getMinorGroup().getNumRecovered());
+		recoveredLabel = new JLabel("Total number of recovered people: " + name.getMinorGroup().getNumRecovered());
 		recoveredLabel.setFont(standard);
 		recoveredLabel.setForeground(Color.green);
 		recovered.add(recoveredLabel);
@@ -236,7 +237,7 @@ public class GUI implements ActionListener
 		dead = new JPanel(new FlowLayout(SwingConstants.LEADING, 25, 15));
 		dead.setBounds(50, 375, 275, 100);
 		dead.setBackground(Color.black);
-		deadLabel = new JLabel("Total number of dead people: " + sim.getMinorGroup().getNumDead());
+		deadLabel = new JLabel("Total number of dead people: " + name.getMinorGroup().getNumDead());
 		deadLabel.setFont(standard);
 		deadLabel.setForeground(Color.green);
 		dead.add(deadLabel);
@@ -352,15 +353,7 @@ public class GUI implements ActionListener
 		transmissionLabel.setVisible(true);
 		frame.setVisible(true);
 	}
-
-
-
-
-
-
-
-
-
+	
 	private void displayInputMenu()
 	{
 		transmission.setVisible(true);
@@ -532,23 +525,18 @@ public class GUI implements ActionListener
 		introStart.setVisible(false);
 	}
 
-	private void simulate()
-	{
+	private void simulate(){
+		name = new SimulationManager(userInputs);
 		while (userInputs.getIterations() > 0) {
 			userInputs.setIterations(userInputs.getIterations()-1);
-			sim = new SimulationManager(userInputs);
-			sim.runSim();
-
+			name.setUserInputs(userInputs);
+			name.runSim();
 		}  
 
 		//if (userInputs.getIterations() == 0) {
 		//	displaySimulationEndMenu();
 		//}
-
-
-
 	}
-
 
 	@Override
 	public void actionPerformed(ActionEvent e) 
@@ -556,6 +544,7 @@ public class GUI implements ActionListener
 		if(e.getSource() == introStart)
 		{
 			displayInputMenu();
+			//Tell Simulation to Go
 		}
 		
 		if(e.getSource() == start)
@@ -659,7 +648,5 @@ public class GUI implements ActionListener
 			displayGoodbyeWindow();
 		}
 	}
-
-
 
 }
