@@ -238,7 +238,7 @@ public class GUI implements ActionListener
 		infected = new JPanel(new FlowLayout(SwingConstants.LEADING, 25, 15));
 		infected.setBounds(50, 175, 275, 100);
 		infected.setBackground(Color.black);
-		infectedLabel = new JLabel("Total number of infected people: " + name.getMinorGroup().getNumInfected());
+		infectedLabel = new JLabel("Total number of infected people: " + name.getMinorGroup().getTotalInfected());
 		infectedLabel.setFont(standard);
 		infectedLabel.setForeground(Color.green);
 		infected.add(infectedLabel);
@@ -248,7 +248,7 @@ public class GUI implements ActionListener
 		recovered = new JPanel(new FlowLayout(SwingConstants.LEADING, 25, 15));
 		recovered.setBounds(50, 275, 275, 100);
 		recovered.setBackground(Color.black);
-		recoveredLabel = new JLabel("Total number of recovered people: " + name.getMinorGroup().getNumRecovered());
+		recoveredLabel = new JLabel("Total number of recovered people: " + name.getMinorGroup().getTotalImmune());
 		recoveredLabel.setFont(standard);
 		recoveredLabel.setForeground(Color.green);
 		recovered.add(recoveredLabel);
@@ -258,7 +258,7 @@ public class GUI implements ActionListener
 		dead = new JPanel(new FlowLayout(SwingConstants.LEADING, 25, 15));
 		dead.setBounds(50, 375, 275, 100);
 		dead.setBackground(Color.black);
-		deadLabel = new JLabel("Total number of dead people: " + name.getMinorGroup().getNumDead());
+		deadLabel = new JLabel("Total number of dead people: " + name.getMinorGroup().getTotalDead());
 		deadLabel.setFont(standard);
 		deadLabel.setForeground(Color.green);
 		dead.add(deadLabel);
@@ -561,6 +561,11 @@ public class GUI implements ActionListener
 		userInputs.setIterations(userInputs.getIterations()-1);
 		name.setUserInputs(userInputs); 
 		name.runSim();
+		
+		deadLabel.setText("Total number of dead people: " + name.getMinorGroup().getTotalDead());
+		recoveredLabel.setText("Total number of recovered people: " + name.getMinorGroup().getTotalImmune());
+		infectedLabel.setText("Total number of infected people: " + name.getMinorGroup().getTotalInfected());
+		susceptibleLabel.setText("Total number of susceptible people: " + name.getMinorGroup().getNumSusceptible());
 
 		//if (userInputs.getIterations() == 0) {
 		//	displaySimulationEndMenu();
