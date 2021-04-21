@@ -589,17 +589,40 @@ public class GUI implements ActionListener
 		{
 			displayInputMenu();
 			//Tell Simulation to Go
+			
 		}
 		
 		if(e.getSource() == loadPresets)
 		{
 			//load presets
 			//headerInput is textfield name
+			float[] preValues = new float[6];
+			preValues = name.recorder.readPreset(headerInput.getText());
+			lethalityInput.setText(Float.toString(preValues[0]));
+			transmissionInput.setText(Float.toString(preValues[1])); 
+			lifespanInput.setText(Integer.toString( (int) preValues[2])); 
+			mutationInput.setText(Integer.toString( (int) preValues[3])); 
+			iterationInput.setText(Integer.toString( (int) preValues[4])); 
+			groupSizeInput.setText(Integer.toString( (int) preValues[5])); 
 		}
 		
 		if(e.getSource() == savePresets)
 		{
 			//save textfield inputs as presets
+			try {
+				name.recorder.savePreset(
+					headerInput.getText(),
+					Float.parseFloat(lethalityInput.getText()),
+					Float.parseFloat(transmissionInput.getText()),
+					Integer.parseInt(lifespanInput.getText()),
+					Integer.parseInt(mutationInput.getText()),
+					Integer.parseInt(iterationInput.getText()),
+					Integer.parseInt(groupSizeInput.getText())
+				);
+			}catch(NumberFormatException numEx){
+				System.out.println("Wrong Data Type!");
+				numEx.printStackTrace();
+			}
 		}
 		
 		if(e.getSource() == start)
@@ -698,6 +721,7 @@ public class GUI implements ActionListener
 		if(e.getSource() == saveYes)
 		{
 			//do something
+			
 		}
 
 		//end the program, thank you window

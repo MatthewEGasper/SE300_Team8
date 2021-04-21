@@ -26,6 +26,9 @@ public class SimulationManager {
 	
 	public void runSim() {
 		this.printMinorGroup();
+		recorder.createDataDump();
+		recorder.writeDataDumpHeader();
+		
 		for (int i = 0; i < iterations; i++) {
 			contagion.calculateMutationChange(disease);
 			System.out.print((i+1) + ".) Lethality: " + disease.getLethality());
@@ -39,6 +42,22 @@ public class SimulationManager {
 				}
 				group.checkTotals();
 			}
+			
+			recorder.setTotalInfected(group.getTotalInfected());
+			recorder.setTotalImmune(group.getTotalImmune());
+			recorder.setTotalDead(group.getTotalDead());
+			
+			//Currently Redundant I KNOW! (strictly for the Save File)
+			recorder.setCurrentPopulation(group.getPeople().size());
+			recorder.setCurrentInfected(group.getTotalInfected());
+			recorder.setCurrentImmune(group.getTotalImmune());
+			
+			recorder.calcInfectionRate();
+			recorder.calcMortalityRate();
+			recorder.calcRecoveryRate();
+			
+			recorder.appendDataDump();
+			
 			clock++;
 		}
 		

@@ -19,7 +19,7 @@ import java.io.BufferedReader;
 
 public class DataRecorder {
 	private int intial_population = 0, total_infected = 0, total_immune = 0, total_dead = 0;
-	private int current_population = 0, current_infected = 0, current_immune = 0, current_dead = 0;
+	private int current_population = 0, current_infected = 0, current_immune = 0;
 	private int old_infected = 0;
 	private float infection_rate = 0, mortality_rate = 0, recovery_rate = 0;
 
@@ -100,7 +100,7 @@ public class DataRecorder {
 			System.out.println("data_dump.txt has been opened!");
 
 			dataWriter.write(intial_population + "," + total_infected + "," + total_immune + "," + total_dead + ",");
-			dataWriter.write(current_population + "," + current_infected + "," + current_immune + "," + current_dead + ",");
+			dataWriter.write(current_population + "," + current_infected + "," + current_immune + "," + ",");
 			dataWriter.write(infection_rate + "," + mortality_rate + "," + recovery_rate);
 			dataWriter.write("\n");
 			dataWriter.close();
@@ -299,22 +299,6 @@ public class DataRecorder {
 		current_immune = num;
 	}
 
-	public void setCurrentDead(int num) {
-		current_dead = num;
-	}
-
-	public void setInfectionRate(float num) {
-		infection_rate = num;
-	}
-
-	public void setMortalityRate(float num) {
-		mortality_rate = num;
-	}
-
-	public void setRecoveryRate(float num) {
-		recovery_rate = num;
-	}
-
 	// -----------------------------------------------------------------------------
 	public int getTotalPopulation() {
 		return intial_population;
@@ -342,10 +326,6 @@ public class DataRecorder {
 
 	public int getCurrentImmune() {
 		return current_immune;
-	}
-
-	public int getCurrentDead() {
-		return current_dead;
 	}
 
 	public float getInfectionRate() {
