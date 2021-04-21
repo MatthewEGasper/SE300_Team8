@@ -70,14 +70,14 @@ public class MinorGroup {
 			if ( !people.get(i).getLifeState() ) {
 				numDead++;
 			}
-			else if ( people.get(i).getSusceptible() ) {
-				numSusceptible++;
-			}
 			else if ( people.get(i).getInfected() ) {
 				numInfected++;
 			}
 			else if ( people.get(i).getRecovered() ) {
 				numRecovered++;
+			}
+			else {
+				numSusceptible++;
 			}
 		}
 	}

@@ -29,10 +29,7 @@ public class Contagion {
 	 * iterating to reflect the time passing.
 	 */
 	public void diseaseFighterCalculator(Person person) {
-		if (person.getDisease() != null && person.getLifeState() && person.getDisease().getLifespan() > 0)// if the person
-																																																			// is infected and
-																																																			// alive,
-																																																			// calculate the
+		if (person.getDiseaseCounter() > 0)// if the person																																															// calculate the
 																																																			// fight process.
 		{
 			// Sets the damage to a randomized value and updates person health and disease
@@ -40,13 +37,13 @@ public class Contagion {
 			float damage = (int) ((person.getDisease().getLethality() - person.getImmuneSystemResistance())
 					* rng.nextInt(10));
 			person.setHealth(person.getHealth() - damage);
-			person.getDisease().setLifespan(person.getDisease().getLifespan() - 1);
+			person.setDiseaseCounter(person.getDiseaseCounter() - 1);
 			// Checks if a condition has been met to either say the person has died or the
 			// disease has been fought off
 			if (person.getHealth() <= 0) {
 				person.setLifeState(false);
 			}
-			if (person.getDisease().getLifespan() == 0) {
+			if (person.getDiseaseCounter() == 0) {
 				ArrayList<Disease> immuneTemp = new ArrayList<Disease>();
 				immuneTemp = person.getImmunityList();
 				immuneTemp.add(person.getDisease());
@@ -69,17 +66,17 @@ public class Contagion {
 	public void diseaseSpreadCalculator(MinorGroup group) {
 		// check each group member for infection
 		for (int i = 0; i < group.getPeople().size(); i++) {
-			if (group.getPeople().get(i).getHasDisease()) {
+			if (group.getPeople().get(i).getInfected()) {
 				// upon finding an infected group member, check interaction with all at risk
 				// group members
 				for (int j = 0; j < group.getPeople().size(); j++) {
-					if (!group.getPeople().get(j).getHasDisease()) {
+					if (group.getPeople().get(j).getSusceptible()) {
 						// If another member of the group isn't already infected, test for interaction
-						if (rng.nextFloat() < group.getPeople().get(i).getExposureLevel()
+						if ( 40 < group.getPeople().get(i).getExposureLevel()
 								* group.getPeople().get(j).getExposureLevel()) {
 							// If the random number is smaller than the product of the peoples' exposure
 							// levels, they interact.
-							if (rng.nextFloat() < group.getPeople().get(i).getDisease().getTransmissionRange()
+							if ( 40 < group.getPeople().get(i).getDisease().getTransmissionRange()
 									* group.getPeople().get(j).getImmuneSystemResistance()) {
 								// If the random number is smaller than the product of the transmission value of
 								// the disease and the at risk person's immune system

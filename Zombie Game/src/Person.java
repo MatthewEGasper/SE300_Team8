@@ -15,12 +15,14 @@ public class Person {
 	private Disease disease;
 	private boolean hasDisease = false;
 	
-	private boolean susceptible = true, infected = false, recovered = false;
+	private boolean susceptible = false, infected = false, recovered = false;
+	private int diseaseCounter;
 
 	public Person() {
 		health = (float) (Math.random() * 11);
 		immuneSystemResistance = (float) (Math.random() * 11);
 		exposureLevel = (float) (Math.random() * 11);
+		susceptible = true;
 	}
 
 	public Person(Disease disease) {
@@ -28,6 +30,8 @@ public class Person {
 		health = (float) (Math.random() * 11);
 		immuneSystemResistance = (float) (Math.random() * 11);
 		hasDisease = true;
+		exposureLevel = (float) (Math.random() * 11);
+		infected = true;
 	}
 
 	public void setImmuneSystemResistance(float num) {
@@ -111,5 +115,13 @@ public class Person {
 	
 	public boolean getRecovered() {
 		return recovered;
+	}
+
+	public int getDiseaseCounter() {
+		return diseaseCounter;
+	}
+
+	public void setDiseaseCounter(int diseaseCounter) {
+		this.diseaseCounter = diseaseCounter;
 	}
 }

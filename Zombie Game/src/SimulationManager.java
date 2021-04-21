@@ -13,11 +13,14 @@ public class SimulationManager {
 	
 	public SimulationManager(UserDefinedData userData) {
 		disease = new Disease(userData);
+		double num = 0;
 		for (int i = 0; i < userData.getGroupSize(); i++) {
-			if (Math.random() > 0.5) {
-				group.getPeople().add(new Person(disease));
+			num = Math.random();
+			if (num > 0.9) {
+				group.getPeople().add(i,new Person(disease));
+				group.getPeople().get(i).setDiseaseCounter(userData.getLifespan());
 			} else {
-				group.getPeople().add(new Person());
+				group.getPeople().add(i,new Person());
 			}
 		}
 		iterations = userData.getIterations();
@@ -35,13 +38,16 @@ public class SimulationManager {
 			System.out.print(" Transmission Range: " + disease.getTransmissionRange());
 			System.out.print(" Life Span: " + disease.getLifespan() + "\n");
 			
+			
 			for (int j = 0; j < group.getPeople().size(); j++) {
-				if (group.getPeople().get(j).getHasDisease()) {
+				if (group.getPeople().get(j).getInfected()) {
 					contagion.diseaseFighterCalculator((group.getPeople().get(j)));
 
 				}
-				group.checkTotals();
 			}
+			
+			contagion.diseaseSpreadCalculator(group);
+
 			
 			recorder.setTotalInfected(group.getTotalInfected());
 			recorder.setTotalImmune(group.getTotalImmune());
@@ -79,7 +85,6 @@ public class SimulationManager {
 			}
 
 		}
-		System.out.println(group.getNumSusceptible());
 	}
 	
 	

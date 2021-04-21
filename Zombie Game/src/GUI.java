@@ -226,7 +226,7 @@ public class GUI implements ActionListener
 
 		//Create susceptible head count
 		susceptible = new JPanel(new FlowLayout(SwingConstants.LEADING, 25, 15));
-		susceptible.setBounds(50, 75, 275, 100);
+		susceptible.setBounds(50, 75, 325, 100);
 		susceptible.setBackground(Color.black);
 		susceptibleLabel = new JLabel("Total number of susceptible people: " + name.getMinorGroup().getNumSusceptible());
 		susceptibleLabel.setFont(standard);
@@ -236,9 +236,9 @@ public class GUI implements ActionListener
 
 		//Create Infected head count
 		infected = new JPanel(new FlowLayout(SwingConstants.LEADING, 25, 15));
-		infected.setBounds(50, 175, 275, 100);
+		infected.setBounds(50, 175, 325, 100);
 		infected.setBackground(Color.black);
-		infectedLabel = new JLabel("Total number of infected people: " + name.getMinorGroup().getTotalInfected());
+		infectedLabel = new JLabel("Total number of infected people: " + name.getMinorGroup().getNumInfected());
 		infectedLabel.setFont(standard);
 		infectedLabel.setForeground(Color.green);
 		infected.add(infectedLabel);
@@ -246,9 +246,9 @@ public class GUI implements ActionListener
 
 		//Create Recovered head count
 		recovered = new JPanel(new FlowLayout(SwingConstants.LEADING, 25, 15));
-		recovered.setBounds(50, 275, 275, 100);
+		recovered.setBounds(50, 275, 325, 100);
 		recovered.setBackground(Color.black);
-		recoveredLabel = new JLabel("Total number of recovered people: " + name.getMinorGroup().getTotalImmune());
+		recoveredLabel = new JLabel("Total number of recovered people: " + name.getMinorGroup().getNumRecovered());
 		recoveredLabel.setFont(standard);
 		recoveredLabel.setForeground(Color.green);
 		recovered.add(recoveredLabel);
@@ -256,9 +256,9 @@ public class GUI implements ActionListener
 
 		//Create Dead head count
 		dead = new JPanel(new FlowLayout(SwingConstants.LEADING, 25, 15));
-		dead.setBounds(50, 375, 275, 100);
+		dead.setBounds(50, 375, 325, 100);
 		dead.setBackground(Color.black);
-		deadLabel = new JLabel("Total number of dead people: " + name.getMinorGroup().getTotalDead());
+		deadLabel = new JLabel("Total number of dead people: " + name.getMinorGroup().getNumDead());
 		deadLabel.setFont(standard);
 		deadLabel.setForeground(Color.green);
 		dead.add(deadLabel);
@@ -561,11 +561,14 @@ public class GUI implements ActionListener
 		userInputs.setIterations(userInputs.getIterations()-1);
 		name.setUserInputs(userInputs); 
 		name.runSim();
+		name.getMinorGroup().checkTotals();
 		
-		deadLabel.setText("Total number of dead people: " + name.getMinorGroup().getTotalDead());
-		recoveredLabel.setText("Total number of recovered people: " + name.getMinorGroup().getTotalImmune());
-		infectedLabel.setText("Total number of infected people: " + name.getMinorGroup().getTotalInfected());
+		deadLabel.setText("Total number of dead people: " + name.getMinorGroup().getNumDead());
+		recoveredLabel.setText("Total number of recovered people: " + name.getMinorGroup().getNumRecovered());
+		infectedLabel.setText("Total number of infected people: " + name.getMinorGroup().getNumInfected());
 		susceptibleLabel.setText("Total number of susceptible people: " + name.getMinorGroup().getNumSusceptible());
+
+
 
 		//if (userInputs.getIterations() == 0) {
 		//	displaySimulationEndMenu();
