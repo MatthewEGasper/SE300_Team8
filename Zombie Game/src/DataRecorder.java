@@ -96,7 +96,7 @@ public class DataRecorder {
 
 	public void appendDataDump() {
 		try {
-			FileWriter dataWriter = new FileWriter("data_dump.txt", true);
+			FileWriter  dataWriter = new FileWriter("data_dump.txt",true);
 			System.out.println("data_dump.txt has been opened!");
 
 			dataWriter.write(intial_population + "," + total_infected + "," + total_immune + "," + total_dead + ",");
@@ -109,6 +109,7 @@ public class DataRecorder {
 			System.out.println("You have angered the file system gods, while writing to a file!");
 			e.printStackTrace();
 		}
+		System.out.println("I APPENDED: " + current_infected);
 	}
 
 	public void readDataDump() {

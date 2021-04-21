@@ -571,11 +571,9 @@ public class GUI implements ActionListener
 
 	private void simulate(){
 		name = new SimulationManager(userInputs);
-		while (userInputs.getIterations() > 0) {
-			userInputs.setIterations(userInputs.getIterations()-1);
-			name.setUserInputs(userInputs);
-			name.runSim();
-		}  
+		userInputs.setIterations(userInputs.getIterations()-1);
+		name.setUserInputs(userInputs); 
+		name.runSim();
 
 		//if (userInputs.getIterations() == 0) {
 		//	displaySimulationEndMenu();
