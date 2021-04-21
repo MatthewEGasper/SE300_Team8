@@ -14,7 +14,7 @@ public class GUI implements ActionListener
 	JFrame frame;
 	JPanel intro1, intro2, intro3, intro4, intro5, intro6;
 	JLabel intro1Label, intro2Label, intro3Label, intro4Label, intro5Label, intro6Label;
-	JButton introStart, loadPresets, savePresets, start, pause, end;
+	JButton introStart, loadPresets, savePresets, start, end;
 	JTextField headerInput, transmissionInput, mutationInput, groupSizeInput, iterationInput, lethalityInput, lifespanInput;
 	JLabel headerLabel, transmissionLabel, mutationLabel, groupSizeLabel, iterationLabel, lethalityLabel, lifespanLabel;
 	JPanel header, transmission, mutation,  groupSize, iteration, lethality, lifespan;
@@ -215,7 +215,7 @@ public class GUI implements ActionListener
 		frame.add(groupSize);
 		frame.add(iteration);
 
-		//Add buttons to start/pause/end simulation. END IS NOT IN USE CURRENTLY.
+		//Add buttons to start/end simulation. END IS NOT IN USE CURRENTLY.
 		start = new JButton("Run Simulation");
 		start.setBounds(375, 400, 150, 100);
 		start.setBackground(Color.gray);
@@ -223,14 +223,6 @@ public class GUI implements ActionListener
 		start.setVisible(false);
 		frame.add(start);
 		start.addActionListener(this);
-
-		pause = new JButton("Pause");
-		pause.setBounds(375, 400, 150, 100);
-		pause.setBackground(Color.gray);
-		pause.setForeground(Color.green);
-		pause.setVisible(false);
-		frame.add(pause);
-		pause.addActionListener(this);
 
 		//Create susceptible head count
 		susceptible = new JPanel(new FlowLayout(SwingConstants.LEADING, 25, 15));
@@ -395,7 +387,6 @@ public class GUI implements ActionListener
 		start.setVisible(true);
 		savePresets.setVisible(true);
 		loadPresets.setVisible(true);
-		pause.setVisible(false);
 		susceptible.setVisible(false);
 		infected.setVisible(false);
 		recovered.setVisible(false);
@@ -433,7 +424,6 @@ public class GUI implements ActionListener
 		start.setVisible(false);
 		savePresets.setVisible(false);
 		loadPresets.setVisible(false);
-		pause.setVisible(false);
 		susceptible.setVisible(true);
 		infected.setVisible(true);
 		recovered.setVisible(true);
@@ -470,7 +460,6 @@ public class GUI implements ActionListener
 		start.setVisible(false);
 		savePresets.setVisible(false);
 		loadPresets.setVisible(false);
-		pause.setVisible(false);
 		susceptible.setVisible(true);
 		infected.setVisible(true);
 		recovered.setVisible(true);
@@ -507,7 +496,6 @@ public class GUI implements ActionListener
 		start.setVisible(false);
 		savePresets.setVisible(false);
 		loadPresets.setVisible(false);
-		pause.setVisible(false);
 		susceptible.setVisible(true);
 		infected.setVisible(true);
 		recovered.setVisible(true);
@@ -544,7 +532,6 @@ public class GUI implements ActionListener
 		start.setVisible(false);
 		savePresets.setVisible(false);
 		loadPresets.setVisible(false);
-		pause.setVisible(false);
 		susceptible.setVisible(false);
 		infected.setVisible(false);
 		recovered.setVisible(false);
@@ -645,7 +632,6 @@ public class GUI implements ActionListener
 				start.setVisible(false);
 				savePresets.setVisible(false);
 				loadPresets.setVisible(false);
-				pause.setVisible(true);
 				simulate();
 				susceptible.setVisible(true);
 				infected.setVisible(true);
@@ -669,10 +655,6 @@ public class GUI implements ActionListener
 
 		}
 
-		if(e.getSource() == pause)
-		{
-			displayInputMenu();
-		}
 
 		if(e.getSource() == results)
 		{
@@ -700,7 +682,7 @@ public class GUI implements ActionListener
 		//Ask for new variables
 		if(e.getSource() == changeVariables)
 		{
-			//displayInputMenu();??
+			displayInputMenu();
 		}
 
 		//conclude program if user wants to end
