@@ -32,7 +32,7 @@ public class MinorGroup {
 	public int getTotalInfected() {
 		int totalInfected = 0;
 		for(int i=0; i<people.size(); i++) {
-			if(people.get(i).getHasDisease()) {
+			if(people.get(i).getInfected()) {
 				totalInfected++;
 			}
 		}

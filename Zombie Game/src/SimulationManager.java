@@ -33,11 +33,16 @@ public class SimulationManager {
 		recorder.writeDataDumpHeader();
 		
 		for (int i = 0; i < iterations; i++) {
+			group.checkTotals();
+			System.out.println(group.getNumInfected() + "   " + group.getNumSusceptible() + "  " + group.getNumRecovered() + "   " + group.getNumDead());
+			
 			contagion.calculateMutationChange(disease);
 			System.out.print((i+1) + ".) Lethality: " + disease.getLethality());
 			System.out.print(" Transmission Range: " + disease.getTransmissionRange());
 			System.out.print(" Life Span: " + disease.getLifespan() + "\n");
 			
+			contagion.diseaseSpreadCalculator(group);
+
 			
 			for (int j = 0; j < group.getPeople().size(); j++) {
 				if (group.getPeople().get(j).getInfected()) {
@@ -46,22 +51,23 @@ public class SimulationManager {
 				}
 			}
 			
-			contagion.diseaseSpreadCalculator(group);
 
-			
-			recorder.setTotalInfected(group.getTotalInfected());
-			recorder.setTotalImmune(group.getTotalImmune());
-			recorder.setTotalDead(group.getTotalDead());
+			group.checkTotals();
+			recorder.setTotalInfected(group.getNumInfected());
+			recorder.setTotalImmune(group.getNumRecovered());
+			recorder.setTotalDead(group.getNumDead());
 			
 			//Currently Redundant I KNOW! (strictly for the Save File)
-			recorder.setCurrentPopulation(group.getPeople().size());
-			recorder.setCurrentInfected(group.getTotalInfected());
-			recorder.setCurrentImmune(group.getTotalImmune());
+			recorder.setCurrentPopulation(group.getPeople().size() - group.getNumDead());
+			recorder.setCurrentInfected(group.getNumInfected());
+			recorder.setCurrentImmune(group.getNumRecovered());
 			
 			recorder.calcInfectionRate();
 			recorder.calcMortalityRate();
 			recorder.calcRecoveryRate();
 			
+			System.out.println(recorder.getInfectionRate() + "    " + recorder.getMortalityRate() + "    " + recorder.getRecoveryRate());
+			System.out.println(recorder.getTotalInfected() + "    " + recorder.getTotalImmune());
 			recorder.appendDataDump();
 			
 			clock++;

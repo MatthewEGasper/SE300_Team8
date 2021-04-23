@@ -83,6 +83,7 @@ public class Contagion {
 								// The at risk person is infected.
 								group.getPeople().get(j).setDisease(group.getPeople().get(i).getDisease());
 								group.getPeople().get(j).setInfected();
+								group.getPeople().get(j).setDiseaseCounter(group.getPeople().get(j).getDisease().getLifespan());
 							}
 						}
 					}

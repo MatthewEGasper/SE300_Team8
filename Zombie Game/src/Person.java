@@ -13,7 +13,6 @@ public class Person {
 	private ArrayList<Disease> immunityList = new ArrayList<Disease>(); // Change to string and add a name variable to
 																																			// diseases? or make this a disease array?
 	private Disease disease;
-	private boolean hasDisease = false;
 	
 	private boolean susceptible = false, infected = false, recovered = false;
 	private int diseaseCounter;
@@ -29,7 +28,6 @@ public class Person {
 		this.disease = disease;
 		health = (float) (Math.random() * 11);
 		immuneSystemResistance = (float) (Math.random() * 11);
-		hasDisease = true;
 		exposureLevel = (float) (Math.random() * 11);
 		infected = true;
 	}
@@ -101,9 +99,6 @@ public class Person {
 		return disease;
 	}
 
-	public boolean getHasDisease() {
-		return hasDisease;
-	}
 	
 	public boolean getSusceptible() {
 		return susceptible;
