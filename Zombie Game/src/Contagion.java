@@ -3,7 +3,9 @@
  * Desc: This class has consumed the scope of DiseaseFighterCalculator and includes DiseaseSSpreadCalculator and ResponseThresholdCalculator.
  * It is best to consider this class a decentralized calculator for various interactions in the simulation.
  * Auth: Elijah Jenkins/Bryan Polk
- * Date: 3/06/2021
+ * Date: 4/23/2021
+ * 
+ * TODO: Fix the function descriptions because I was lazy and didn't rewrite them yet -Bryan 4/23/21
  */
 
 import java.util.ArrayList;
@@ -11,30 +13,27 @@ import java.util.Random;
 
 public class Contagion {
 	// Declare global variables
-	private ArrayList<Disease> diseaseArray;
 	private Random rng;
-
-	// Default constructor to initialize empty arraylist of diseases.
-	public Contagion() {
-		diseaseArray = new ArrayList<Disease>();
-		rng = new Random(); // Temporary rng for testing purposes; don't believe it's seeded with system
-												// time at the moment.
+	private Disease disease;
+	public Contagion(Disease disease) {
+		rng = new Random(System.nanoTime());
+		this.disease = disease;
 	}
 
 	/*
-	 * Last edited 4/6/21 Bryan Polk The disease fighter calculator takes a person
+	 * Last edited 4/23/21 Bryan Polk The disease fighter calculator takes a person
 	 * and checks for disease. This calculator is currently able to randomize damage
 	 * to the infected person based on the disease's lethality and the person's
 	 * immune system resistance, and updates the disease's lifespan variable after
 	 * iterating to reflect the time passing.
 	 */
-	public void diseaseFighterCalculator(Person person) {
-		if (person.getDiseaseCounter() > 0)// if the person																																															// calculate the
-																																																			// fight process.
+	private void diseaseFighterCalculator(Person person) {
+		//If the person has remaining disease lifespan on their infection
+		if (person.getDiseaseCounter() > 0)
 		{
 			// Sets the damage to a randomized value and updates person health and disease
 			// lifespan for the iteration
-			float damage = (int) ((person.getDisease().getLethality() - person.getImmuneSystemResistance())
+			float damage = (int) ((disease.getLethality() - person.getImmuneSystemResistance())
 					* rng.nextInt(10));
 			person.setHealth(person.getHealth() - damage);
 			person.setDiseaseCounter(person.getDiseaseCounter() - 1);
@@ -44,50 +43,53 @@ public class Contagion {
 				person.setLifeState(false);
 			}
 			if (person.getDiseaseCounter() == 0) {
-				ArrayList<Disease> immuneTemp = new ArrayList<Disease>();
-				immuneTemp = person.getImmunityList();
-				immuneTemp.add(person.getDisease());
-				person.setImmunityList(immuneTemp);
-				person.setDisease(null);
 				person.setRecovered();
-
 			}
 		}
 	}
 
 	/*
-	 * Last edited 3/11/21 Bryan Polk The disease spread calculator considers the
+	 * Last edited 4/23/21 Bryan Polk The disease spread calculator considers the
 	 * spread between two members of a MinorGroup. It checks to see if members of a
 	 * group have any diseases to spread, then simulates the possibility of an
 	 * infected individual contacting an at risk individual. Furthermore, it
 	 * simulates the possible spread of the virus to the at risk individual, and
 	 * will update their disease parameter as needed.
 	 */
-	public void diseaseSpreadCalculator(MinorGroup group) {
-		// check each group member for infection
+	public void diseaseCalculator(MinorGroup group) {
+		float infectedPercent = calculatePercentInfected(group);
+		// check each group member for vulnerability
 		for (int i = 0; i < group.getPeople().size(); i++) {
-			if (group.getPeople().get(i).getInfected()) {
-				// upon finding an infected group member, check interaction with all at risk
-				// group members
-				for (int j = 0; j < group.getPeople().size(); j++) {
-					if (group.getPeople().get(j).getSusceptible()) {
-						// If another member of the group isn't already infected, test for interaction
-						if ( 40 < group.getPeople().get(i).getExposureLevel()
-								* group.getPeople().get(j).getExposureLevel()) {
-							// If the random number is smaller than the product of the peoples' exposure
-							// levels, they interact.
-							if ( 40 < group.getPeople().get(i).getDisease().getTransmissionRange()
-									* group.getPeople().get(j).getImmuneSystemResistance()) {
-								// If the random number is smaller than the product of the transmission value of
-								// the disease and the at risk person's immune system
-								// The at risk person is infected.
-								group.getPeople().get(j).setDisease(group.getPeople().get(i).getDisease());
-								group.getPeople().get(j).setInfected();
-								group.getPeople().get(j).setDiseaseCounter(group.getPeople().get(j).getDisease().getLifespan());
-							}
-						}
+			if (group.getPeople().get(i).getSusceptible()) {
+				// upon finding an at risk group member, check their exposure against the group's level of infection
+				if(group.getPeople().get(i).getExposureLevel() * infectedPercent > rng.nextFloat()*10)
+				{
+					group.getPeople().get(i).setExposed();
+					group.getPeople().get(i).setExposureTimer(disease.getLifespan()*2);
+				}
+				
+			}
+			if (group.getPeople().get(i).getExposed())
+			{
+				//If they've been exposed, determine if they are infected
+				if(group.getPeople().get(i).getImmuneSystemResistance()/disease.getTransmissionRange() >
+					rng.nextFloat()*10	)
+				{
+					group.getPeople().get(i).setInfected();
+					group.getPeople().get(i).setDiseaseCounter(disease.getLifespan());
+				}
+				else
+				{
+					group.getPeople().get(i).decrementExposureTimer();
+					if(group.getPeople().get(i).getExposureTimer() == 0)
+					{
+						group.getPeople().get(i).setSusceptible(true);
 					}
 				}
+			}
+			if(group.getPeople().get(i).getInfected())
+			{
+				diseaseFighterCalculator(group.getPeople().get(i));
 			}
 		}
 	}
@@ -98,7 +100,7 @@ public class Contagion {
 	 * is met will reduce the baseline exposure of all group members based on the
 	 * innate response strength value of the group. It will then update the value of
 	 * the baseline exposure to reflect the changes.
-	 */
+	 
 	public void responseThresholdCalculator(MinorGroup group) {
 		// if the group's exposure is above the set threshold
 		if (group.getBaselinePopulationExposure() > group.getResponseThreshold()) {
@@ -112,14 +114,21 @@ public class Contagion {
 		}
 	}
 
+					********METHOD CURRENTLY NOT IN USE.*********
+	*/
+	
+	
+	
 	/*
-	 * Last edited 3/06/21 Bryan Polk This function calculates a group's average
-	 * exposure level across all Person objects it contains.
+	 * Last edited 4/23/21 Bryan Polk This function calculates a group's percentile of infected individuals.
 	 */
-	public float calculateBaselineExposure(MinorGroup group) {
+	private float calculatePercentInfected(MinorGroup group) {
 		float avg = 0;
 		for (int i = 0; i < group.getPeople().size(); i++) {
-			avg += group.getPeople().get(i).getExposureLevel();
+			if(group.getPeople().get(i).getExposed())
+			{
+				avg++;
+			}
 		}
 		avg = avg / group.getPeople().size();
 

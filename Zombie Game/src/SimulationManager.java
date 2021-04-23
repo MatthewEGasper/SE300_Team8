@@ -1,6 +1,6 @@
 
 public class SimulationManager {
-	Contagion contagion = new Contagion();
+	Contagion contagion;
 	MinorGroup group = new MinorGroup();
 	Disease disease;
 	int iterations;
@@ -16,22 +16,28 @@ public class SimulationManager {
 		double num = 0;
 		for (int i = 0; i < userData.getGroupSize(); i++) {
 			num = Math.random();
-			if (num > 0.9) {
-				group.getPeople().add(i,new Person(disease));
+			if (num > 0.98) {
+				group.getPeople().add(i,new Person());
 				group.getPeople().get(i).setDiseaseCounter(userData.getLifespan());
+				group.getPeople().get(i).setInfected();
+			} else if (num > 0.90){
+				group.getPeople().add(i,new Person());
+				group.getPeople().get(i).setExposed();
 			} else {
 				group.getPeople().add(i,new Person());
 			}
 		}
 		iterations = userData.getIterations();
+		contagion = new Contagion(disease);
 	}
 	
 	
-	public void runSim() {
-		this.printMinorGroup();
-		recorder.createDataDump();
-		recorder.writeDataDumpHeader();
-		
+	public void runSim(boolean continued) {
+		if(!continued){
+			this.printMinorGroup();
+			recorder.createDataDump();
+			recorder.writeDataDumpHeader();
+		}
 		for (int i = 0; i < iterations; i++) {
 			group.checkTotals();
 			System.out.println(group.getNumInfected() + "   " + group.getNumSusceptible() + "  " + group.getNumRecovered() + "   " + group.getNumDead());
@@ -41,16 +47,7 @@ public class SimulationManager {
 			System.out.print(" Transmission Range: " + disease.getTransmissionRange());
 			System.out.print(" Life Span: " + disease.getLifespan() + "\n");
 			
-			contagion.diseaseSpreadCalculator(group);
-
-			
-			for (int j = 0; j < group.getPeople().size(); j++) {
-				if (group.getPeople().get(j).getInfected()) {
-					contagion.diseaseFighterCalculator((group.getPeople().get(j)));
-
-				}
-			}
-			
+			contagion.diseaseCalculator(group);
 
 			group.checkTotals();
 			recorder.setTotalInfected(group.getNumInfected());
@@ -67,7 +64,7 @@ public class SimulationManager {
 			recorder.calcRecoveryRate();
 			
 			System.out.println(recorder.getInfectionRate() + "    " + recorder.getMortalityRate() + "    " + recorder.getRecoveryRate());
-			System.out.println(recorder.getTotalInfected() + "    " + recorder.getTotalImmune());
+			System.out.println(recorder.getTotalInfected() + "    " + recorder.getTotalImmune() + "    " + group.getNumSusceptible());
 			recorder.appendDataDump();
 			
 			clock++;
@@ -102,8 +99,5 @@ public class SimulationManager {
 	public MinorGroup getMinorGroup() { return group; }
 	public Disease getDisease() { return disease; }
 	
-	public void setUserInputs(UserDefinedData userData) {
-		iterations = userData.getIterations();
-	}
 	
 }

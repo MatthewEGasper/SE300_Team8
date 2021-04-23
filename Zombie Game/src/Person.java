@@ -10,28 +10,22 @@ import java.util.ArrayList;
 public class Person {
 	private float immuneSystemResistance = 0, exposureLevel = 0, health = 0;
 	private boolean lifeState = true;
-	private ArrayList<Disease> immunityList = new ArrayList<Disease>(); // Change to string and add a name variable to
-																																			// diseases? or make this a disease array?
-	private Disease disease;
-	
-	private boolean susceptible = false, infected = false, recovered = false;
-	private int diseaseCounter;
+	private boolean susceptible = false, exposed = false, infected = false, recovered = false;
+	private int diseaseCounter, exposureTimer;
 
 	public Person() {
 		health = (float) (Math.random() * 11);
 		immuneSystemResistance = (float) (Math.random() * 11);
 		exposureLevel = (float) (Math.random() * 11);
 		susceptible = true;
+		infected = false;
+		recovered = false;
 	}
-
-	public Person(Disease disease) {
-		this.disease = disease;
-		health = (float) (Math.random() * 11);
-		immuneSystemResistance = (float) (Math.random() * 11);
-		exposureLevel = (float) (Math.random() * 11);
-		infected = true;
+	
+	public void decrementExposureTimer() {
+		this.exposureTimer--;
 	}
-
+	
 	public void setImmuneSystemResistance(float num) {
 		immuneSystemResistance = num;
 	}
@@ -49,30 +43,51 @@ public class Person {
 
 	public void setLifeState(boolean life) {
 		lifeState = life;
+		if(!life)
+		{
+			susceptible = false;
+			exposed = false;
+			infected = false;
+			recovered = false;
+		}
 	}
 
-	public void setImmunityList(ArrayList<Disease> immunities) {
-		immunityList = immunities;
-	}
-
-	public void setDisease(Disease ailment) {
-		disease = ailment;
-	}
-	
 	public void setSusceptible(boolean s) {
 		susceptible = s;
+		if(s)
+		{
+			exposed = false;
+			infected = false;
+			recovered = false;
+		}
+	}
+	
+	public void setExposed()
+	{
+		exposed = true;
+		susceptible = false;
 	}
 	
 	public void setInfected() {
 		infected = true;
 		susceptible = false;
+		exposed = false;
 	}
 	
 	public void setRecovered() {
 		recovered = true;
 		infected = false;
+		exposed = false;
+		susceptible = false;
 	}
 
+	public void setDiseaseCounter(int diseaseCounter) {
+		this.diseaseCounter = diseaseCounter;
+	}
+	
+	public void setExposureTimer(int exposureTimer) {
+		this.exposureTimer = exposureTimer;
+	}
 	// -----------------------------------------------------------------------------
 
 	public float getImmuneSystemResistance() {
@@ -90,18 +105,13 @@ public class Person {
 	public boolean getLifeState() {
 		return lifeState;
 	}
-
-	public ArrayList<Disease> getImmunityList() {
-		return immunityList;
-	}
-
-	public Disease getDisease() {
-		return disease;
-	}
-
 	
 	public boolean getSusceptible() {
 		return susceptible;
+	}
+	
+	public boolean getExposed() {
+		return exposed;
 	}
 	
 	public boolean getInfected() {
@@ -116,7 +126,7 @@ public class Person {
 		return diseaseCounter;
 	}
 
-	public void setDiseaseCounter(int diseaseCounter) {
-		this.diseaseCounter = diseaseCounter;
+	public int getExposureTimer() {
+		return exposureTimer;
 	}
 }

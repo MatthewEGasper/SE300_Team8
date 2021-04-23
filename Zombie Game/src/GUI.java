@@ -25,11 +25,12 @@ public class GUI implements ActionListener
 	JButton cancel1, iterationsOnly, changeVariables;
 	UserDefinedData userInputs;
 	private SimulationManager name;
+	private boolean simulated;
 	//private SimulationManager name = new SimulationManager();
 
 	public GUI(SimulationManager stuff)
 	{
-		
+		simulated = false;
 		name = stuff;
 		//Create default font and instantiate UserDefinedData.
 		standard = new Font("TimesRoman", Font.PLAIN, 16);
@@ -557,17 +558,18 @@ public class GUI implements ActionListener
 	}
 
 	private void simulate(){
-		name = new SimulationManager(userInputs);
-		userInputs.setIterations(userInputs.getIterations()-1);
-		name.setUserInputs(userInputs); 
-		name.runSim();
+		if(!simulated)
+		{
+			name = new SimulationManager(userInputs);
+		}
+		name.runSim(simulated);
 		name.getMinorGroup().checkTotals();
 		
 		deadLabel.setText("Total number of dead people: " + name.getMinorGroup().getNumDead());
 		recoveredLabel.setText("Total number of recovered people: " + name.getMinorGroup().getNumRecovered());
 		infectedLabel.setText("Total number of infected people: " + name.getMinorGroup().getNumInfected());
 		susceptibleLabel.setText("Total number of susceptible people: " + name.getMinorGroup().getNumSusceptible());
-
+		simulated = true;
 
 
 		//if (userInputs.getIterations() == 0) {

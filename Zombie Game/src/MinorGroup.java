@@ -29,36 +29,6 @@ public class MinorGroup {
 		this.baselinePopulationExposure = baselinePopulationExposure;
 	}
 	
-	public int getTotalInfected() {
-		int totalInfected = 0;
-		for(int i=0; i<people.size(); i++) {
-			if(people.get(i).getInfected()) {
-				totalInfected++;
-			}
-		}
-		return totalInfected;
-	}
-	
-	public int getTotalDead() {
-		int totalDead = 0;
-		for(int i=0; i<people.size(); i++) {
-			if(!people.get(i).getLifeState()) {
-				totalDead++;
-			}
-		}
-		return totalDead;
-	}
-	
-	public int getTotalImmune() {
-		int totalImmune = 0;
-		for(int i=0; i<people.size(); i++) {
-			if(people.get(i).getImmunityList()!=null) {
-				totalImmune++;
-			}
-		}
-		return totalImmune;
-	}
-	
 	public void checkTotals() {
 		numSusceptible = 0;
 		numInfected = 0;
@@ -76,7 +46,7 @@ public class MinorGroup {
 			else if ( people.get(i).getRecovered() ) {
 				numRecovered++;
 			}
-			else {
+			else if ( people.get(i).getSusceptible() ) {
 				numSusceptible++;
 			}
 		}
