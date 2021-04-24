@@ -92,7 +92,9 @@ public class SimulationManager {
 	
 	
 	// setters
-	
+	public void setIterations(int iterations) {
+		this.iterations = iterations;
+	}
 	
 	// getters
 	public Contagion getContagion() { return contagion; }

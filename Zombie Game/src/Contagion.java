@@ -72,7 +72,7 @@ public class Contagion {
 			if (group.getPeople().get(i).getExposed())
 			{
 				//If they've been exposed, determine if they are infected
-				if(group.getPeople().get(i).getImmuneSystemResistance()/disease.getTransmissionRange() >
+				if(group.getPeople().get(i).getImmuneSystemResistance()/disease.getTransmissionRange() <
 					rng.nextFloat()*10	)
 				{
 					group.getPeople().get(i).setInfected();
@@ -125,7 +125,7 @@ public class Contagion {
 	private float calculatePercentInfected(MinorGroup group) {
 		float avg = 0;
 		for (int i = 0; i < group.getPeople().size(); i++) {
-			if(group.getPeople().get(i).getExposed())
+			if(group.getPeople().get(i).getExposed() || group.getPeople().get(i).getInfected())
 			{
 				avg++;
 			}

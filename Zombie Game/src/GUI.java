@@ -562,6 +562,9 @@ public class GUI implements ActionListener
 		{
 			name = new SimulationManager(userInputs);
 		}
+		//if it's getting iterations added and variables changed, update the variables in addition to the iterations
+		//TODO^^^^^
+		name.setIterations(userInputs.getIterations());
 		name.runSim(simulated);
 		name.getMinorGroup().checkTotals();
 		
