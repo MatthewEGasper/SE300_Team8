@@ -65,7 +65,7 @@ public class SimulationManager {
 			
 			System.out.println(recorder.getInfectionRate() + "    " + recorder.getMortalityRate() + "    " + recorder.getRecoveryRate());
 			System.out.println(recorder.getTotalInfected() + "    " + recorder.getTotalImmune() + "    " + group.getNumSusceptible());
-			recorder.appendDataDump();
+			recorder.appendDataDump(i);
 			
 			clock++;
 		}

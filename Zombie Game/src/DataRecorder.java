@@ -81,7 +81,7 @@ public class DataRecorder {
 			FileWriter dataWriter = new FileWriter("data_dump.txt");
 			System.out.println("data_dump.txt has been opened!");
 
-			dataWriter.write("intial_population,total_infected,total_immune,total_dead,");
+			dataWriter.write("iteration,total_infected,total_immune,total_dead,");
 			dataWriter.write("current_population,current_infected,current_immune,current_dead,");
 			dataWriter.write("infection_rate,mortality_rate,recover_rate");
 			dataWriter.write("\n");
@@ -94,13 +94,13 @@ public class DataRecorder {
 		}
 	}
 
-	public void appendDataDump() {
+	public void appendDataDump(int iteration) {
 		try {
 			FileWriter  dataWriter = new FileWriter("data_dump.txt",true);
 			System.out.println("data_dump.txt has been opened!");
 
-			dataWriter.write(intial_population + "," + total_infected + "," + total_immune + "," + total_dead + ",");
-			dataWriter.write(current_population + "," + current_infected + "," + current_immune + "," + ",");
+			dataWriter.write(iteration + "," + total_infected + "," + total_immune + "," + total_dead + ",");
+			dataWriter.write(current_population + "," + current_infected + "," + current_immune + ",");
 			dataWriter.write(infection_rate + "," + mortality_rate + "," + recovery_rate);
 			dataWriter.write("\n");
 			dataWriter.close();
