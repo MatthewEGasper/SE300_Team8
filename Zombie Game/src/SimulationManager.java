@@ -38,6 +38,10 @@ public class SimulationManager {
 			recorder.createDataDump();
 			recorder.writeDataDumpHeader();
 		}
+		else
+		{
+			contagion.setDisease(disease);
+		}
 		for (int i = 0; i < iterations; i++) {
 			group.checkTotals();
 			System.out.println(group.getNumInfected() + "   " + group.getNumSusceptible() + "  " + group.getNumRecovered() + "   " + group.getNumDead());
@@ -94,6 +98,11 @@ public class SimulationManager {
 	// setters
 	public void setIterations(int iterations) {
 		this.iterations = iterations;
+	}
+	
+	public void setDisease(Disease newDisease)
+	{
+		disease = newDisease;
 	}
 	
 	// getters

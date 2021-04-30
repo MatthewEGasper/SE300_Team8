@@ -8,7 +8,6 @@
  * TODO: Fix the function descriptions because I was lazy and didn't rewrite them yet -Bryan 4/23/21
  */
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Contagion {
@@ -195,5 +194,12 @@ public class Contagion {
 				}
 			}
 		}
+	}
+	
+	
+	//Setter for new disease
+	public void setDisease(Disease newDisease)
+	{
+		disease = newDisease;
 	}
 }

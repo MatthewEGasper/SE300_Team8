@@ -252,33 +252,50 @@ public class GUI implements ActionListener
 	
 	
 	
-	private void displayInputMenu()
+	private void displayInputMenu(int menuSelect)
 	{
-		header.setVisible(true);
-		transmission.setVisible(true);
-		mutation.setVisible(true);
-		lethality.setVisible(true);
-		lifespan.setVisible(true);
-		groupSize.setVisible(true);
-		iteration.setVisible(true);
-		start.setVisible(true);
-		savePresets.setVisible(true);
-		loadPresets.setVisible(true);
-		susceptible.setVisible(false);
-		infected.setVisible(false);
-		recovered.setVisible(false);
-		dead.setVisible(false);
-		resume.setVisible(false);
-		conclude.setVisible(false);
-		cancel.setVisible(false);
-		saveYes.setVisible(false);
-		saveNo.setVisible(false);
-		results.setVisible(false);
-		goodbye.setVisible(false);
+		//Display input menu items for a full menu (first round of iteration input)
+		if(menuSelect == 0)
+		{
+			header.setVisible(true);
+			transmission.setVisible(true);
+			mutation.setVisible(true);
+			lethality.setVisible(true);
+			lifespan.setVisible(true);
+			groupSize.setVisible(true);
+			iteration.setVisible(true);
+			start.setVisible(true);
+			savePresets.setVisible(true);
+			loadPresets.setVisible(true);
+		}
+		//Display input menu items for iterations only
+		if(menuSelect == 1)
+		{
+			iteration.setVisible(true);
+			start.setVisible(true);
+		}
+		//Display input menu items for changing disease values and adding iterations
+		else if(menuSelect == 2)
+		{
+			transmission.setVisible(true);
+			mutation.setVisible(true);
+			lethality.setVisible(true);
+			lifespan.setVisible(true);
+			iteration.setVisible(true);
+			start.setVisible(true);
+		}
+
+		//Hide post-simulation screen items
 		cancel1.setVisible(false);
 		addIterations.setVisible(false);
 		iterationsOnly.setVisible(false);
 		changeVariables.setVisible(false);
+		susceptible.setVisible(false);
+		infected.setVisible(false);
+		recovered.setVisible(false);
+		dead.setVisible(false);
+		
+		//Hide intro screen items
 		intro1.setVisible(false);
 		intro2.setVisible(false);
 		intro3.setVisible(false);
@@ -291,6 +308,7 @@ public class GUI implements ActionListener
 
 	private void displaySimulationEndMenu()
 	{
+		//Hide input menu items
 		header.setVisible(false);
 		transmission.setVisible(false);
 		mutation.setVisible(false);
@@ -301,12 +319,16 @@ public class GUI implements ActionListener
 		start.setVisible(false);
 		savePresets.setVisible(false);
 		loadPresets.setVisible(false);
+		
+		//Display infection statistics and options to continue/conclude
 		susceptible.setVisible(true);
 		infected.setVisible(true);
 		recovered.setVisible(true);
 		dead.setVisible(true);
 		resume.setVisible(true);
 		conclude.setVisible(true);
+		
+		//Hide menu items from conclusion/continue menus if the user tries to go back
 		cancel.setVisible(false);
 		saveYes.setVisible(false);
 		saveNo.setVisible(false);
@@ -316,121 +338,50 @@ public class GUI implements ActionListener
 		addIterations.setVisible(false);
 		iterationsOnly.setVisible(false);
 		changeVariables.setVisible(false);
-		intro1.setVisible(false);
-		intro2.setVisible(false);
-		intro3.setVisible(false);
-		intro4.setVisible(false);
-		intro5.setVisible(false);
-		intro6.setVisible(false);
-		introStart.setVisible(false);
+		
+		
 	}
 
 	private void displayAddIterationsMenu()
 	{
-		header.setVisible(false);
-		transmission.setVisible(false);
-		mutation.setVisible(false);
-		lethality.setVisible(false);
-		lifespan.setVisible(false);
-		groupSize.setVisible(false);
-		iteration.setVisible(false);
-		start.setVisible(false);
-		savePresets.setVisible(false);
-		loadPresets.setVisible(false);
-		susceptible.setVisible(true);
-		infected.setVisible(true);
-		recovered.setVisible(true);
-		dead.setVisible(true);
+		//Hide the continue/conclude buttons
 		resume.setVisible(false);
 		conclude.setVisible(false);
-		cancel.setVisible(false);
-		saveYes.setVisible(false);
-		saveNo.setVisible(false);
-		results.setVisible(false);
-		goodbye.setVisible(false);
+		
+		//Display new menu items for continuing simulation
 		cancel1.setVisible(true);
 		addIterations.setVisible(true);
 		iterationsOnly.setVisible(true);
 		changeVariables.setVisible(true);
-		intro1.setVisible(false);
-		intro2.setVisible(false);
-		intro3.setVisible(false);
-		intro4.setVisible(false);
-		intro5.setVisible(false);
-		intro6.setVisible(false);
-		introStart.setVisible(false);
 	}
 
 	private void displayProgramEndMenu()
 	{
-		header.setVisible(false);
-		transmission.setVisible(false);
-		mutation.setVisible(false);
-		lethality.setVisible(false);
-		lifespan.setVisible(false);
-		groupSize.setVisible(false);
-		iteration.setVisible(false);
-		start.setVisible(false);
-		savePresets.setVisible(false);
-		loadPresets.setVisible(false);
-		susceptible.setVisible(true);
-		infected.setVisible(true);
-		recovered.setVisible(true);
-		dead.setVisible(true);
+		//Hide the continue/conclude buttons
 		resume.setVisible(false);
 		conclude.setVisible(false);
+		
+		//Show the save function options
 		cancel.setVisible(true);
 		saveYes.setVisible(true);
 		saveNo.setVisible(true);
-		results.setVisible(false);
-		goodbye.setVisible(false);
-		cancel1.setVisible(false);
-		addIterations.setVisible(false);
-		iterationsOnly.setVisible(false);
-		changeVariables.setVisible(false);
-		intro1.setVisible(false);
-		intro2.setVisible(false);
-		intro3.setVisible(false);
-		intro4.setVisible(false);
-		intro5.setVisible(false);
-		intro6.setVisible(false);
-		introStart.setVisible(false);
+		
 	}
 
 	private void displayGoodbyeWindow()
-	{
-		header.setVisible(false);
-		transmission.setVisible(false);
-		mutation.setVisible(false);
-		lethality.setVisible(false);
-		lifespan.setVisible(false);
-		groupSize.setVisible(false);
-		iteration.setVisible(false);
-		start.setVisible(false);
-		savePresets.setVisible(false);
-		loadPresets.setVisible(false);
+	{		
+		//Hide all SEIR stats and buttons
 		susceptible.setVisible(false);
 		infected.setVisible(false);
 		recovered.setVisible(false);
 		dead.setVisible(false);
-		resume.setVisible(false);
-		conclude.setVisible(false);
 		cancel.setVisible(false);
 		saveYes.setVisible(false);
 		saveNo.setVisible(false);
-		results.setVisible(false);
+		
+		//Display the goodbye label and thank the user
 		goodbye.setVisible(true);
-		cancel1.setVisible(false);
-		addIterations.setVisible(false);
-		iterationsOnly.setVisible(false);
-		changeVariables.setVisible(false);
-		intro1.setVisible(false);
-		intro2.setVisible(false);
-		intro3.setVisible(false);
-		intro4.setVisible(false);
-		intro5.setVisible(false);
-		intro6.setVisible(false);
-		introStart.setVisible(false);
+		
 	}
 
 	private void simulate(){
@@ -440,7 +391,12 @@ public class GUI implements ActionListener
 		}
 		//if it's getting iterations added and variables changed, update the variables in addition to the iterations
 		//TODO^^^^^
-		name.setIterations(userInputs.getIterations());
+		else
+		{
+			name.setIterations(userInputs.getIterations());
+			Disease newDisease = new Disease(userInputs);
+			name.setDisease(newDisease);
+		}
 		name.runSim(simulated);
 		name.getMinorGroup().checkTotals();
 		
@@ -461,7 +417,7 @@ public class GUI implements ActionListener
 	{
 		if(e.getSource() == introStart)
 		{
-			displayInputMenu();
+			displayInputMenu(0);
 			//Tell Simulation to Go
 			
 		}
@@ -566,12 +522,13 @@ public class GUI implements ActionListener
 		if(e.getSource() == iterationsOnly)
 		{
 			//ask for more iterations
+			displayInputMenu(1);
 		}
 
 		//Ask for new variables
 		if(e.getSource() == changeVariables)
 		{
-			displayInputMenu();
+			displayInputMenu(2);
 		}
 
 		//conclude program if user wants to end
