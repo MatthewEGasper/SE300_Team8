@@ -255,15 +255,18 @@ public class DataRecorder {
 	}
 	// -------------------------------------------------------------------------------------------------------------
 	public void calcInfectionRate() {
-		infection_rate = (float) (current_infected - old_infected) / current_population;
+		float holder = (float) (current_infected - old_infected) / current_population;
+		if(holder>0) { infection_rate = holder; }
 	}
 
 	public void calcMortalityRate() {
-		mortality_rate = (float) total_dead / total_infected;
+		float holder = (float) total_dead / total_infected;
+		if(holder>0) { mortality_rate = holder; }
 	}
 
 	public void calcRecoveryRate() {
-		recovery_rate = (float) total_immune / total_infected;
+		float holder = (float) total_immune / total_infected;
+		if(holder>0) { recovery_rate = holder; }
 	}
 
 	// -----------------------------------------------------------------------------
