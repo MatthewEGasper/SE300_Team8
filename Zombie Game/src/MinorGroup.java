@@ -8,25 +8,12 @@ import java.util.ArrayList;
 
 public class MinorGroup {
 	private ArrayList<Person> people = new ArrayList<Person>();
-	private Climate climate;
-	private DataRecorder recorder;
-	private int responseThreshold;
 	private int initialPopulation;
-	private float responseStrength;
 	private float baselinePopulationExposure;
 	private int numSusceptible, numInfected, numRecovered, numDead;
 
 	public MinorGroup() {
 
-	}
-
-	public MinorGroup(int responseThreshold, int initialPopulation, float responseStrength,
-			float baselinePopulationExposure) {
-		this.recorder = new DataRecorder();
-		this.responseThreshold = responseThreshold;
-		this.initialPopulation = initialPopulation;
-		this.responseStrength = responseStrength;
-		this.baselinePopulationExposure = baselinePopulationExposure;
 	}
 	
 	public void checkTotals() {
@@ -57,20 +44,8 @@ public class MinorGroup {
 		this.people = people;
 	}
 
-	public void setClimate(Climate climate) {
-		this.climate = climate;
-	}
-
-	public void setResponseThreshold(int responseThreshold) {
-		this.responseThreshold = responseThreshold;
-	}
-
 	public void setInitialPopulation(int initialPopulation) {
 		this.initialPopulation = initialPopulation;
-	}
-
-	public void setResponseStrength(float responseStrength) {
-		this.responseStrength = responseStrength;
 	}
 
 	public void setBaselinePopulationExposure(float baselinePopulationExposure) {
@@ -98,20 +73,8 @@ public class MinorGroup {
 		return this.people;
 	}
 
-	public Climate getClimate() {
-		return this.climate;
-	}
-
-	public int getResponseThreshold() {
-		return this.responseThreshold;
-	}
-
 	public int getInitialPopulation() {
 		return this.initialPopulation;
-	}
-
-	public float getResponseStrength() {
-		return this.responseStrength;
 	}
 
 	public float getBaselinePopulationExposure() {

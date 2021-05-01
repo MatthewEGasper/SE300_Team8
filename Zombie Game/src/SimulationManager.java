@@ -4,7 +4,6 @@ public class SimulationManager {
 	MinorGroup group = new MinorGroup();
 	Disease disease;
 	int iterations;
-	int clock = 0;
 	DataRecorder recorder = new DataRecorder();
 	
 	public SimulationManager() {
@@ -34,7 +33,6 @@ public class SimulationManager {
 	
 	public void runSim(boolean continued) {
 		if(!continued){
-			this.printMinorGroup();
 			recorder.createDataDump();
 			recorder.writeDataDumpHeader();
 		}
@@ -44,12 +42,8 @@ public class SimulationManager {
 		}
 		for (int i = 0; i < iterations; i++) {
 			group.checkTotals();
-			System.out.println(group.getNumInfected() + "   " + group.getNumSusceptible() + "  " + group.getNumRecovered() + "   " + group.getNumDead());
 			
 			contagion.calculateMutationChange(disease);
-			System.out.print((i+1) + ".) Lethality: " + disease.getLethality());
-			System.out.print(" Transmission Range: " + disease.getTransmissionRange());
-			System.out.print(" Life Span: " + disease.getLifespan() + "\n");
 			
 			contagion.diseaseCalculator(group);
 
@@ -67,17 +61,13 @@ public class SimulationManager {
 			recorder.calcMortalityRate();
 			recorder.calcRecoveryRate();
 			
-			System.out.println(recorder.getInfectionRate() + "    " + recorder.getMortalityRate() + "    " + recorder.getRecoveryRate());
-			System.out.println(recorder.getTotalInfected() + "    " + recorder.getTotalImmune() + "    " + group.getNumSusceptible());
 			recorder.appendDataDump(i);
 			
-			clock++;
 		}
 		
-		this.printMinorGroup();
 	}
 	
-	public void printMinorGroup() {
+	/*public void printMinorGroup() {
 		String state = "";
 		for (int i = 0; i < group.getPeople().size(); i++) {
 			if (group.getPeople().get(i).getLifeState() && group.getPeople().get(i).getHealth() > 0) {
@@ -92,7 +82,7 @@ public class SimulationManager {
 			}
 
 		}
-	}
+	}*/
 	
 	
 	// setters

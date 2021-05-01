@@ -7,7 +7,6 @@
 
 public class Disease {
 	private double mutationRate = 0, lethality = 0;
-	private int tempLimitLow = 0, tempLimitHigh = 0, humidityLimitLow = 0, humidityLimitHigh = 0;
 	private double transmissionRange = 0;
 	private int lifespan = 0, mutationChances = 0; // todo, add mutationChances to constructor; currently not added to
 																									// prevent cohesion issues
@@ -39,22 +38,6 @@ public class Disease {
 		this.lethality = lethality;
 	}
 
-	public int getHumidityLimitLow() {
-		return humidityLimitLow;
-	}
-
-	public void setHumidityLimitLow(int humidityLimitLow) {
-		this.humidityLimitLow = humidityLimitLow;
-	}
-
-	public int getTempLimitHigh() {
-		return tempLimitHigh;
-	}
-
-	public void setTempLimitHigh(int tempLimitHigh) {
-		this.tempLimitHigh = tempLimitHigh;
-	}
-
 	public double getTransmissionRange() {
 		return transmissionRange;
 	}
@@ -63,24 +46,8 @@ public class Disease {
 		this.transmissionRange = transmissionRange;
 	}
 
-	public int getTempLimitLow() {
-		return tempLimitLow;
-	}
-
 	public int getMutationChances() {
 		return mutationChances;
-	}
-
-	public void setTempLimitLow(int tempLimitLow) {
-		this.tempLimitLow = tempLimitLow;
-	}
-
-	public int getHumidityLimitHigh() {
-		return humidityLimitHigh;
-	}
-
-	public void setHumidityLimitHigh(int humidityLimitHigh) {
-		this.humidityLimitHigh = humidityLimitHigh;
 	}
 
 	public int getLifespan() {

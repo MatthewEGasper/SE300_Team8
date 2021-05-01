@@ -1,6 +1,5 @@
 public class UserDefinedData {
 	private int iterations;
-	// private int groupNumber;
 	private int groupSize;
 	private double mutationRate;
 	private double transmissionRange;

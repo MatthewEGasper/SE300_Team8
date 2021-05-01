@@ -92,31 +92,6 @@ public class Contagion {
 			}
 		}
 	}
-
-	/*
-	 * Last edited 3/11/21 Bryan Polk The response threshold calculator considers
-	 * the given group's exposure level and response threshold, and if the threshold
-	 * is met will reduce the baseline exposure of all group members based on the
-	 * innate response strength value of the group. It will then update the value of
-	 * the baseline exposure to reflect the changes.
-	 
-	public void responseThresholdCalculator(MinorGroup group) {
-		// if the group's exposure is above the set threshold
-		if (group.getBaselinePopulationExposure() > group.getResponseThreshold()) {
-			// reduce all group members' exposure levels in accordance with the response
-			// strength of the group
-			for (int i = 0; i < group.getPeople().size(); i++) {
-				group.getPeople().get(i)
-						.setExposureLevel(group.getPeople().get(i).getExposureLevel() - group.getResponseStrength());
-			}
-			group.setBaselinePopulationExposure(calculateBaselineExposure(group));
-		}
-	}
-
-					********METHOD CURRENTLY NOT IN USE.*********
-	*/
-	
-	
 	
 	/*
 	 * Last edited 4/23/21 Bryan Polk This function calculates a group's percentile of infected individuals.

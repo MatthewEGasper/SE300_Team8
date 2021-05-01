@@ -79,7 +79,6 @@ public class DataRecorder {
 	public void writeDataDumpHeader() {
 		try {
 			FileWriter dataWriter = new FileWriter("data_dump.txt");
-			System.out.println("data_dump.txt has been opened!");
 
 			dataWriter.write("iteration,total_infected,total_immune,total_dead,");
 			dataWriter.write("current_population,current_infected,current_immune,current_dead,");
@@ -87,7 +86,6 @@ public class DataRecorder {
 			dataWriter.write("\n");
 
 			dataWriter.close();
-			System.out.println("data_dump.txt has been closed!");
 		} catch (IOException e) {
 			System.out.println("You have angered the file system gods, while writing to a file!");
 			e.printStackTrace();
@@ -97,19 +95,16 @@ public class DataRecorder {
 	public void appendDataDump(int iteration) {
 		try {
 			FileWriter  dataWriter = new FileWriter("data_dump.txt",true);
-			System.out.println("data_dump.txt has been opened!");
 
 			dataWriter.write(iteration + "," + total_infected + "," + total_immune + "," + total_dead + ",");
 			dataWriter.write(current_population + "," + current_infected + "," + current_immune + ",");
 			dataWriter.write(infection_rate + "," + mortality_rate + "," + recovery_rate);
 			dataWriter.write("\n");
 			dataWriter.close();
-			System.out.println("data_dump.txt has been closed!");
 		} catch (IOException e) {
 			System.out.println("You have angered the file system gods, while writing to a file!");
 			e.printStackTrace();
 		}
-		System.out.println("I APPENDED: " + current_infected);
 	}
 
 	public void readDataDump() {
