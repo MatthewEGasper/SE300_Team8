@@ -48,14 +48,13 @@ public class SimulationManager {
 			contagion.diseaseCalculator(group);
 
 			group.checkTotals();
-			recorder.setTotalInfected(group.getNumInfected());
+			recorder.setTotalInfected(group.getNumInfected()+group.getNumDead()+group.getNumRecovered());
 			recorder.setTotalImmune(group.getNumRecovered());
 			recorder.setTotalDead(group.getNumDead());
 			
 			//Currently Redundant I KNOW! (strictly for the Save File)
 			recorder.setCurrentPopulation(group.getPeople().size() - group.getNumDead());
 			recorder.setCurrentInfected(group.getNumInfected());
-			recorder.setCurrentImmune(group.getNumRecovered());
 			
 			recorder.calcInfectionRate();
 			recorder.calcMortalityRate();
