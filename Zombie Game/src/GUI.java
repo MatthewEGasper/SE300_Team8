@@ -547,6 +547,7 @@ public class GUI implements ActionListener
 		if(e.getSource() == saveYes)
 		{
 			//do something
+			displayGoodbyeWindow();
 			
 		}
 
@@ -554,6 +555,7 @@ public class GUI implements ActionListener
 		if(e.getSource() == saveNo)
 		{
 			displayGoodbyeWindow();
+			name.getRecorder().writeDataDumpHeader();
 		}
 	}
 

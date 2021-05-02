@@ -99,6 +99,6 @@ public class SimulationManager {
 	public Contagion getContagion() { return contagion; }
 	public MinorGroup getMinorGroup() { return group; }
 	public Disease getDisease() { return disease; }
-	
+	public DataRecorder getRecorder() { return recorder; }
 	
 }
