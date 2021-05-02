@@ -61,7 +61,7 @@ public class Contagion {
 		for (int i = 0; i < group.getPeople().size(); i++) {
 			if (group.getPeople().get(i).getSusceptible()) {
 				// upon finding an at risk group member, check their exposure against the group's level of infection
-				if(group.getPeople().get(i).getExposureLevel() * infectedPercent > rng.nextFloat()*10)
+				if(group.getPeople().get(i).getExposureLevel() * infectedPercent > rng.nextFloat()*45)
 				{
 					group.getPeople().get(i).setExposed();
 					group.getPeople().get(i).setExposureTimer(disease.getLifespan()*2);
@@ -72,7 +72,7 @@ public class Contagion {
 			{
 				//If they've been exposed, determine if they are infected
 				if(group.getPeople().get(i).getImmuneSystemResistance()/disease.getTransmissionRange() <
-					rng.nextFloat()*10	)
+					rng.nextFloat()*11	)
 				{
 					group.getPeople().get(i).setInfected();
 					group.getPeople().get(i).setDiseaseCounter(disease.getLifespan());

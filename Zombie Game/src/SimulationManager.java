@@ -13,13 +13,16 @@ public class SimulationManager {
 	public SimulationManager(UserDefinedData userData) {
 		disease = new Disease(userData);
 		double num = 0;
-		for (int i = 0; i < userData.getGroupSize(); i++) {
+		group.getPeople().add(0,new Person());
+		group.getPeople().get(0).setDiseaseCounter(userData.getLifespan());
+		group.getPeople().get(0).setInfected();
+		for (int i = 1; i < userData.getGroupSize(); i++) {
 			num = Math.random();
-			if (num > 0.98) {
+			if (num > 0.99) {
 				group.getPeople().add(i,new Person());
 				group.getPeople().get(i).setDiseaseCounter(userData.getLifespan());
 				group.getPeople().get(i).setInfected();
-			} else if (num > 0.90){
+			} else if (num > 0.98){
 				group.getPeople().add(i,new Person());
 				group.getPeople().get(i).setExposed();
 			} else {
